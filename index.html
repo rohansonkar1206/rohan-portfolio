@@ -4,9 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Rohan Vinod Sonkar — CCNA, RHCSA & AWS Network Engineer</title>
-<meta name="description" content="Portfolio of Rohan Vinod Sonkar — CCNA, RHCSA and AWS certified, building enterprise networks, hardened RHEL servers and cloud labs. Open to Network, NOC and Cloud Support roles." />
+<meta name="description" content="Portfolio of Rohan Vinod Sonkar — CCNA, RHCSA and AWS certified. Enterprise network design, hardened Linux servers, and a full-stack scalable AWS deployment with VPC, RDS, Lambda and CloudFormation." />
 <meta property="og:title" content="Rohan Vinod Sonkar — CCNA, RHCSA & AWS Network Engineer" />
-<meta property="og:description" content="Enterprise network design, Linux administration and AWS cloud fundamentals — projects, skills, certifications and resume." />
+<meta property="og:description" content="Enterprise network design, Linux administration and a full-stack AWS cloud deployment — projects, skills, certifications and resume." />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary_large_image" />
 
@@ -355,6 +355,15 @@
   .project-points li { display: flex; gap: .75rem; font-size: .875rem; line-height: 1.6; color: var(--muted-foreground); }
   .project-points li .dot { margin-top: .45rem; height: .35rem; width: .35rem; flex-shrink: 0; border-radius: 999px; background: var(--accent); }
   .project-tags { margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: .5rem; }
+  .project-featured { grid-column: 1 / -1; }
+  .project-diagram {
+    margin-top: 1.25rem;
+    width: 100%;
+    height: auto;
+    border-radius: .75rem;
+    border: 1px solid var(--border);
+    display: block;
+  }
 
   /* Experience */
   .exp-grid { display: grid; gap: 1.5rem; }
@@ -449,10 +458,11 @@
         <h1 class="hero-name text-gradient font-display">Rohan Vinod<br />Sonkar</h1>
         <p class="hero-role">Network Engineer · Linux Administrator · AWS Cloud</p>
         <p class="hero-desc">
-          IT professional moving from finance and administration into infrastructure and cloud,
-          backed by three industry certifications and hands-on labs — from OSPF routing and ACL
-          security to RHEL server hardening and AWS fundamentals. Seeking an entry-level Network
-          Engineer, NOC Engineer or Cloud/IT Support role.
+          IT professional building hands-on expertise in cloud infrastructure and enterprise
+          networking, backed by CCNA, RHCSA and AWS certifications. My work spans enterprise
+          network design (VLANs, OSPF, ACL security), hardened Linux server administration, and
+          full-stack AWS deployments — including load-balanced compute, managed databases,
+          serverless automation and infrastructure-as-code.
         </p>
         <div class="hero-actions">
           <a class="btn-brand" href="mailto:rohanvsonkar@gmail.com">Hire Me</a>
@@ -509,11 +519,13 @@
       <div class="surface-card card-pad">
         <p class="about-copy">
           I hold CCNA for enterprise networking and network security, RHCSA for Linux systems
-          administration, and AWS Cloud Practitioner for cloud fundamentals. My labs cover
-          multi-router enterprise designs in Cisco Packet Tracer, hardened RHEL servers with
-          SELinux and Firewalld, and AWS services including EC2, S3, IAM and VPC. Alongside this
-          I bring 5+ years of operational and people-management experience — supervising staff,
-          designing processes and documenting everything carefully.
+          administration, and AWS Cloud Practitioner for cloud fundamentals. Beyond the certs, I've
+          built a full-stack AWS deployment covering VPC networking, load-balanced EC2, RDS,
+          serverless automation with Lambda/SNS/SQS, CloudFront delivery and CloudFormation IaC —
+          alongside multi-router enterprise designs in Cisco Packet Tracer and hardened RHEL
+          servers with SELinux and Firewalld. I bring this together with 5+ years of operational
+          and people-management experience — supervising staff, designing processes and
+          documenting everything carefully.
         </p>
         <div class="about-tags">
           <span class="chip">OSI 7-Layer</span>
@@ -526,7 +538,7 @@
         <div class="about-meta">
           <div class="about-meta-item"><p class="k">Languages</p><p class="v">English · Hindi · Marathi</p></div>
           <div class="about-meta-item"><p class="k">Location</p><p class="v">Ambivali, Kalyan 421102</p></div>
-          <div class="about-meta-item"><p class="k">Open to</p><p class="v">Network / NOC / Cloud Support</p></div>
+          <div class="about-meta-item"><p class="k">Open to</p><p class="v">Network Engineering · Cloud Infrastructure · Linux SysAdmin</p></div>
         </div>
       </div>
 
@@ -589,10 +601,10 @@
         <div class="contact-orb">RS</div>
       </div>
       <div>
-        <h3 class="contact-heading">Ready for my first infrastructure role</h3>
+        <h3 class="contact-heading">Let's build something reliable</h3>
         <p class="contact-copy">
-          Available for Network Engineer, NOC Engineer and Cloud/IT Support positions — including
-          24x7 support rotations. Reach out and I'll reply the same day.
+          Available for Network Engineering, Cloud Infrastructure and Linux Systems Administration
+          work — full-time roles or project-based engagements. Reach out and I'll reply the same day.
         </p>
         <div class="contact-cards">
           <a class="surface-card" href="mailto:rohanvsonkar@gmail.com">
@@ -625,6 +637,7 @@
     { value: "5+", label: "Years of admin & team leadership" },
     { value: "20+", label: "RHEL lab scenarios solved" },
     { value: "5", label: "Routers in OSPF Area 0 lab" },
+    { value: "14+", label: "AWS services deployed in one project" },
   ];
 
   const MARQUEE = [
@@ -633,16 +646,19 @@
     "AWS Cloud Practitioner",
     "OSPF · VLAN · ACL · NAT",
     "RHEL · SELinux · LVM · Firewalld",
-    "EC2 · S3 · IAM · VPC · CloudWatch",
+    "EC2 · S3 · IAM · VPC · RDS · Lambda",
+    "CloudFront · Route 53 · WAF · CloudFormation",
     "Cisco Packet Tracer · Wireshark · PuTTY",
     "MBA Finance — 8.73 CGPA (A+)",
   ];
 
   const SKILL_GROUPS = [
     { title: "Cloud — AWS", items: [
-      "EC2 provisioning & management","S3 storage and bucket policies",
+      "EC2 provisioning & management","S3 storage, versioning & encryption",
       "IAM users, groups, roles, permissions","VPC subnets, security groups, routing",
-      "CloudWatch, SNS, ALB, Auto Scaling","AWS CLI, Shared Responsibility Model" ] },
+      "RDS (MySQL), ALB, Auto Scaling","Lambda, SNS, SQS — serverless & decoupling",
+      "CloudFront, Route 53 — global delivery","WAF, KMS — application security",
+      "CloudWatch alarms & logging","CloudFormation (IaC), AWS CLI" ] },
     { title: "Networking & Switching", items: [
       "TCP/IP, IPv4 & IPv6, SSH","Subnetting — VLSM / CIDR",
       "OSPF, static routing, DHCP, DNS, NAT/PAT","VLANs, inter-VLAN routing, trunking",
@@ -658,25 +674,33 @@
   ];
 
   const PROJECTS = [
-    { index: "01", title: "Enterprise Network Design", stack: "Cisco Packet Tracer",
+    { index: "01", title: "Scalable AWS Web Application", stack: "AWS — VPC, EC2, RDS, Lambda, CloudFront, IaC",
+      image: "aws-architecture.svg",
+      tags: ["VPC","ALB","RDS","Lambda","SNS/SQS","CloudFront","WAF","KMS","CloudFormation"], points: [
+        "Designed and deployed a scalable, secure blog application — custom VPC networking, load-balanced EC2 with an attached EBS volume, and a decoupled RDS MySQL database.",
+        "Built event-driven automation with Lambda (S3-triggered image resize), SNS (post notifications) and SQS (background task queueing).",
+        "Delivered globally via CloudFront and Route 53, secured with AWS WAF and KMS encryption, and monitored with CloudWatch alarms and logs.",
+        "Provisioned infrastructure as code with a CloudFormation template, deployed via the AWS CLI, for repeatable, version-controlled deployment." ] },
+    { index: "02", title: "Enterprise Network Design", stack: "Cisco Packet Tracer",
       tags: ["3-Tier","VLAN","OSPF","DHCP","NAT"], points: [
-        "Designed and configured a multi-router, multi-switch enterprise network on a three-tier architecture.",
-        "Implemented VLANs, inter-VLAN routing, OSPF, DHCP, NAT and ACLs for secure, efficient communication.",
-        "Verified reachability and behaviour with ping, traceroute and Cisco IOS show commands." ] },
-    { index: "02", title: "OSPF Dynamic Routing", stack: "5 routers, Area 0",
+        "Solved the traffic-segmentation problem flat, unsegmented networks create — designed a 3-tier, multi-router architecture with VLANs to isolate departments and reduce broadcast traffic.",
+        "Configured OSPF for dynamic routing so the network auto-reroutes on link failure, plus DHCP, NAT and ACLs for automatic addressing, external access and access control between segments.",
+        "Verified every routing and access decision with ping, traceroute and Cisco IOS show commands — not just built it, but proved it worked as intended." ] },
+    { index: "03", title: "OSPF Dynamic Routing", stack: "5 routers, Area 0",
       tags: ["OSPF Area 0","Failover","Convergence"], points: [
         "Configured OSPF Area 0 across 5 routers for dynamic route advertisement and automatic failover.",
         "Confirmed full neighbor adjacency and convergence with show ip ospf neighbors and show ip route ospf.",
         "Replaced static routing entirely, improving resilience against link failures." ] },
-    { index: "03", title: "Network Security With ACLs", stack: "Standard & extended ACLs",
+    { index: "04", title: "Network Security With ACLs", stack: "Standard & extended ACLs",
       tags: ["Least Privilege","Filtering","Validation"], points: [
         "Filtered traffic by source IP, destination IP and protocol across 3 departments.",
         "Enforced least-privilege access between departments and blocked unauthorised flows.",
         "Validated every permit and deny rule through rigorous ping and IOS verification testing." ] },
-    { index: "04", title: "RHEL Administration Lab", stack: "RHEL 7/8/9, SELinux, LVM",
+    { index: "05", title: "RHEL Administration Lab", stack: "RHEL 7/8/9, SELinux, LVM",
       tags: ["SELinux","LVM","Firewalld","Systemd"], points: [
-        "Built a home lab covering 20+ real-world admin scenarios: storage, SELinux contexts, cron, SSH and services.",
-        "Hardened servers with SELinux and Firewalld policies, and automated routine tasks with Bash and Systemd.",
+        "Solved the problem a default Linux install creates — open ports, permissive access, no mandatory access control — by hardening RHEL servers from default install to a security-conscious baseline.",
+        "Configured SELinux in enforcing mode for mandatory access control and Firewalld rules to restrict open ports/services to only what's necessary.",
+        "Built a home lab covering 20+ real-world admin scenarios (storage, LVM, cron, SSH, services) and automated routine tasks with Bash and Systemd.",
         "Simulated production incidents and practised root-cause analysis with journalctl, rsyslog and nmcli." ] },
   ];
 
@@ -748,10 +772,11 @@
 
   // Projects
   document.getElementById("projectsGrid").innerHTML = PROJECTS.map(p => `
-    <article class="surface-card card-pad">
+    <article class="surface-card card-pad${p.image ? " project-featured" : ""}">
       <span class="project-index font-mono">${esc(p.index)}</span>
       <h3 class="project-title">${esc(p.title)}</h3>
       <p class="project-stack font-mono">${esc(p.stack)}</p>
+      ${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.title)} architecture diagram" class="project-diagram" loading="lazy" />` : ""}
       <ul class="project-points">
         ${p.points.map(pt => `<li><span class="dot"></span>${esc(pt)}</li>`).join("")}
       </ul>
