@@ -276,7 +276,7 @@
     grid-template-columns: 1fr;
   }
   @media (min-width: 640px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 1024px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (min-width: 1024px) { .stats-grid { grid-template-columns: repeat(5, 1fr); } }
   .stat-card { padding: 1.5rem; }
   .stat-value { font-family: 'Space Grotesk', sans-serif; font-size: 1.875rem; font-weight: 800; color: var(--primary); }
   .stat-label { margin-top: .25rem; font-size: .875rem; color: var(--muted-foreground); }
@@ -356,6 +356,28 @@
   .project-points li .dot { margin-top: .45rem; height: .35rem; width: .35rem; flex-shrink: 0; border-radius: 999px; background: var(--accent); }
   .project-tags { margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: .5rem; }
   .project-featured { grid-column: 1 / -1; }
+  .project-gallery { margin-top: 1.25rem; }
+  .project-gallery .project-diagram { margin-top: 0; }
+  .project-diagram.light { background: #fff; }
+  .gallery-fig { display: none; }
+  .gallery-fig.active { display: block; }
+  .gallery-tabs { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: .75rem; }
+  .gallery-tab {
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted-foreground);
+    border-radius: 999px;
+    padding: .4rem .9rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .08em;
+    transition: border-color .2s, color .2s, background-color .2s;
+  }
+  .gallery-tab:hover { color: var(--foreground); border-color: var(--primary); }
+  .gallery-tab[aria-pressed="true"] { color: var(--primary-foreground); background: var(--primary); border-color: var(--primary); }
+  .gallery-tab:focus-visible, .btn-outline:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+  .project-links { margin-top: 1.25rem; }
   .project-diagram {
     margin-top: 1.25rem;
     width: 100%;
@@ -417,6 +439,25 @@
     font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-foreground);
   }
   @media (min-width: 640px) { .footer-inner { flex-direction: row; text-align: left; } }
+
+  .hero-contacts a { transition: color .2s; }
+  .hero-contacts a:hover { color: var(--primary); }
+  @media (min-width: 640px) { .contact-cards a:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+
+  /* Toast */
+  .toast {
+    position: fixed; left: 50%; bottom: 1.5rem; z-index: 100;
+    transform: translate(-50%, 1rem); opacity: 0; pointer-events: none;
+    max-width: calc(100% - 2rem);
+    padding: .85rem 1.25rem;
+    border: 1px solid var(--border); border-radius: .75rem;
+    background: var(--secondary); color: var(--foreground);
+    font-size: .875rem; line-height: 1.5; text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,.4);
+    transition: opacity .25s, transform .25s;
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+  .toast a { color: var(--primary); text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -431,7 +472,7 @@
       <a class="nav-link" href="#experience">Experience</a>
       <a class="nav-link" href="#education">Education</a>
       <a class="nav-link" href="#contact">Contact</a>
-      <a class="btn-outline" href="resume.pdf" download="Rohan_Sonkar_Resume.pdf">Resume</a>
+      <a class="btn-outline" href="resume.pdf" download="Rohan_Sonkar_Resume.pdf" data-resume>Resume</a>
     </nav>
     <button type="button" class="btn-outline menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">Menu</button>
   </div>
@@ -443,7 +484,7 @@
       <li><a href="#experience">Experience</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a class="resume-link" href="resume.pdf" download="Rohan_Sonkar_Resume.pdf">Download Resume</a></li>
+      <li><a class="resume-link" href="resume.pdf" download="Rohan_Sonkar_Resume.pdf" data-resume>Download Resume</a></li>
     </ul>
   </nav>
 </header>
@@ -466,10 +507,10 @@
         </p>
         <div class="hero-actions">
           <a class="btn-brand" href="mailto:rohanvsonkar@gmail.com">Hire Me</a>
-          <a class="btn-outline" href="resume.pdf" download="Rohan_Sonkar_Resume.pdf">Download Resume</a>
+          <a class="btn-outline" href="resume.pdf" download="Rohan_Sonkar_Resume.pdf" data-resume>Download Resume</a>
           <a class="btn-outline" href="#projects">View Projects</a>
         </div>
-        <ul class="hero-contacts">
+        <ul class="hero-contacts" id="heroContacts">
           <li>Ambivali, Kalyan 421102</li>
           <li>rohanvsonkar@gmail.com</li>
           <li>+91 84540 21296</li>
@@ -606,7 +647,7 @@
           Available for Network Engineering, Cloud Infrastructure and Linux Systems Administration
           work — full-time roles or project-based engagements. Reach out and I'll reply the same day.
         </p>
-        <div class="contact-cards">
+        <div class="contact-cards" id="contactCards">
           <a class="surface-card" href="mailto:rohanvsonkar@gmail.com">
             <p class="k">Email</p><p class="v">rohanvsonkar@gmail.com</p>
           </a>
@@ -616,7 +657,7 @@
         </div>
         <div class="contact-actions">
           <a class="btn-brand" href="mailto:rohanvsonkar@gmail.com">Send an Email</a>
-          <a class="btn-outline" href="resume.pdf" download="Rohan_Sonkar_Resume.pdf">Download Resume</a>
+          <a class="btn-outline" href="resume.pdf" download="Rohan_Sonkar_Resume.pdf" data-resume>Download Resume</a>
         </div>
       </div>
     </div>
@@ -631,10 +672,12 @@
   </div>
 </footer>
 
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <script>
   const STATS = [
     { value: "3", label: "Industry certifications" },
-    { value: "5+", label: "Years of admin & team leadership" },
+    { value: "5+", label: "Years of admin, IT support & team leadership" },
     { value: "20+", label: "RHEL lab scenarios solved" },
     { value: "5", label: "Routers in OSPF Area 0 lab" },
     { value: "14+", label: "AWS services deployed in one project" },
@@ -675,13 +718,19 @@
 
   const PROJECTS = [
     { index: "01", title: "Scalable AWS Web Application", stack: "AWS — VPC, EC2, RDS, Lambda, CloudFront, IaC",
-      image: "aws-architecture.svg",
+      repo: "https://github.com/rohansonkar1206/aws-scalable-web-app",
+      images: [ { src: "aws-architecture.svg", label: "Architecture", alt: "AWS architecture diagram: Route 53, CloudFront, WAF, ALB, EC2, RDS, S3, Lambda, SNS, SQS, CloudWatch and CloudFormation" } ],
       tags: ["VPC","ALB","RDS","Lambda","SNS/SQS","CloudFront","WAF","KMS","CloudFormation"], points: [
         "Designed and deployed a scalable, secure blog application — custom VPC networking, load-balanced EC2 with an attached EBS volume, and a decoupled RDS MySQL database.",
         "Built event-driven automation with Lambda (S3-triggered image resize), SNS (post notifications) and SQS (background task queueing).",
         "Delivered globally via CloudFront and Route 53, secured with AWS WAF and KMS encryption, and monitored with CloudWatch alarms and logs.",
         "Provisioned infrastructure as code with a CloudFormation template, deployed via the AWS CLI, for repeatable, version-controlled deployment." ] },
     { index: "02", title: "Enterprise Network Design", stack: "Cisco Packet Tracer",
+      repo: "https://github.com/rohansonkar1206/Enterprise-Network-Design",
+      images: [
+        { src: "network-design-diagram.png", label: "Design overview", alt: "Enterprise multi-site network design: three branch routers in OSPF Area 0, VLAN segmentation and ACL-protected server network" },
+        { src: "network-topology-packet-tracer.png", label: "Packet Tracer topology", light: true, alt: "Cisco Packet Tracer topology with three ISR 4331 routers, 2960 switches, PCs and a server" }
+      ],
       tags: ["3-Tier","VLAN","OSPF","DHCP","NAT"], points: [
         "Solved the traffic-segmentation problem flat, unsegmented networks create — designed a 3-tier, multi-router architecture with VLANs to isolate departments and reduce broadcast traffic.",
         "Configured OSPF for dynamic routing so the network auto-reroutes on link failure, plus DHCP, NAT and ACLs for automatic addressing, external access and access control between segments.",
@@ -697,6 +746,8 @@
         "Enforced least-privilege access between departments and blocked unauthorised flows.",
         "Validated every permit and deny rule through rigorous ping and IOS verification testing." ] },
     { index: "05", title: "RHEL Administration Lab", stack: "RHEL 7/8/9, SELinux, LVM",
+      repo: "https://github.com/rohansonkar1206/Rhel-Admin-Lab",
+      images: [ { src: "rhel-lab-diagram.png", label: "Layers", alt: "RHEL server hardening layers: Firewalld, SELinux, users and sudo, LVM, systemd, Bash automation, monitoring and troubleshooting" } ],
       tags: ["SELinux","LVM","Firewalld","Systemd"], points: [
         "Solved the problem a default Linux install creates — open ports, permissive access, no mandatory access control — by hardening RHEL servers from default install to a security-conscious baseline.",
         "Configured SELinux in enforcing mode for mandatory access control and Firewalld rules to restrict open ports/services to only what's necessary.",
@@ -713,14 +764,13 @@
   ];
 
   const EXPERIENCE = [
-    { role: "Intern", org: "Baul Savla and Associates", period: "June 2025 – November 2025", points: [
-      "Reviewed and corrected Tally ERP accounting entries to maintain accurate financial records.",
-      "Performed data entry and reconciliation in Excel to support daily operations." ] },
-    { role: "Admin Executive", org: "Omtech Computer Education", period: "2019 – 2024", points: [
-      "Supervised administrative staff and designed new filing and record-keeping systems.",
-      "Assigned and monitored tasks — the project-coordination discipline later applied to multi-device network builds.",
-      "Coached and counselled employees, and maintained personnel, financial and operational records.",
-      "Taught MS Office, Tally ERP Prime with GST and Advanced Excel, including hardware troubleshooting." ] },
+    { role: "Admin Executive & IT Support", org: "Omtech Computer Education | Kalyan, India", period: "2019 – 2024", points: [
+      "Supervised administrative staff, designed filing and record-keeping systems, and assigned and monitored tasks — the project-coordination discipline later applied to multi-device network builds.",
+      "Created and maintained personnel, financial and operational records, and prepared reports for management. Taught MS Office, Tally ERP Prime (GST) and Advanced Excel.",
+      "Provided technical support for desktops, laptops, printers, scanners and peripheral devices; diagnosed and troubleshot hardware and software issues.",
+      "Installed, configured and maintained operating systems and standard applications; performed system upgrades, software patches and preventive maintenance.",
+      "Troubleshot basic LAN and Wi-Fi connectivity issues, and set up and supported network connections for end users.",
+      "Configured and managed user accounts and access permissions; assisted users with login issues, password resets and access-related problems — ensuring timely technical assistance and smooth day-to-day IT operations." ] },
   ];
 
   const EDUCATION = [
@@ -733,7 +783,7 @@
   const STRENGTHS = [
     "Dual-domain foundation — CCNA networking (VLANs, OSPF, ACL security) with RHCSA Linux administration, suited to hybrid Network/Systems support.",
     "Hands-on troubleshooting discipline using ping, traceroute, Wireshark and Cisco IOS show commands.",
-    "5+ years of administrative and organisational experience, including staff supervision and process design.",
+    "5+ years of administrative and IT support experience — desktops, LAN/Wi-Fi, user accounts and access — plus staff supervision and process design.",
     "Proficient in Tally ERP, MS Excel and MS Office, with practical exposure to forex market analysis.",
     "Strong attention to detail and reliability across technical and administrative work.",
   ];
@@ -771,19 +821,43 @@
     </div>`).join("");
 
   // Projects
-  document.getElementById("projectsGrid").innerHTML = PROJECTS.map(p => `
-    <article class="surface-card card-pad${p.image ? " project-featured" : ""}">
+  const gallery = (p, pi) => {
+    if (!p.images) return "";
+    const tabs = p.images.length > 1 ? `
+        <div class="gallery-tabs" role="group" aria-label="${esc(p.title)} diagrams">
+          ${p.images.map((im, i) => `<button type="button" class="gallery-tab" data-gallery="${pi}" data-i="${i}" aria-pressed="${i === 0}">${esc(im.label)}</button>`).join("")}
+        </div>` : "";
+    const figs = p.images.map((im, i) => `
+        <a class="gallery-fig${i === 0 ? " active" : ""}" data-fig="${pi}-${i}" href="${esc(im.src)}" target="_blank" rel="noopener" aria-label="Open ${esc(im.label)} full size">
+          <img src="${esc(im.src)}" alt="${esc(im.alt)}" class="project-diagram${im.light ? " light" : ""}" loading="lazy" />
+        </a>`).join("");
+    return `<div class="project-gallery">${tabs}${figs}</div>`;
+  };
+
+  document.getElementById("projectsGrid").innerHTML = PROJECTS.map((p, pi) => `
+    <article class="surface-card card-pad${p.images ? " project-featured" : ""}">
       <span class="project-index font-mono">${esc(p.index)}</span>
       <h3 class="project-title">${esc(p.title)}</h3>
       <p class="project-stack font-mono">${esc(p.stack)}</p>
-      ${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.title)} architecture diagram" class="project-diagram" loading="lazy" />` : ""}
+      ${gallery(p, pi)}
       <ul class="project-points">
         ${p.points.map(pt => `<li><span class="dot"></span>${esc(pt)}</li>`).join("")}
       </ul>
       <div class="project-tags">
         ${p.tags.map(t => `<span class="chip">${esc(t)}</span>`).join("")}
       </div>
+      ${p.repo ? `<div class="project-links"><a class="btn-outline" href="${esc(p.repo)}" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>` : ""}
     </article>`).join("");
+
+  // Diagram tabs (projects with more than one image)
+  document.getElementById("projectsGrid").addEventListener("click", (e) => {
+    const tab = e.target.closest(".gallery-tab");
+    if (!tab) return;
+    const { gallery: g, i } = tab.dataset;
+    tab.parentElement.querySelectorAll(".gallery-tab").forEach(t => t.setAttribute("aria-pressed", String(t === tab)));
+    tab.closest(".project-gallery").querySelectorAll(".gallery-fig").forEach(f =>
+      f.classList.toggle("active", f.dataset.fig === `${g}-${i}`));
+  });
 
   // Experience timeline
   document.getElementById("expTimeline").innerHTML = EXPERIENCE.map(job => `
@@ -806,6 +880,22 @@
       <div><h3 class="edu-degree">${esc(e.degree)}</h3><p class="edu-school">${esc(e.school)}</p></div>
       <div><p class="edu-result font-mono">${esc(e.result)}</p><p class="edu-year font-mono">${esc(e.year)}</p></div>
     </div>`).join("");
+
+  // Social links — set a URL to show it; leave "" to hide it
+  const SOCIALS = [
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/rohanvsonkar" },
+    { label: "GitHub",   url: "https://github.com/rohansonkar1206" },
+  ].filter(x => x.url);
+
+  const shortUrl = (u) => u.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+
+  document.getElementById("heroContacts").insertAdjacentHTML("beforeend", SOCIALS.map(x => `
+    <li><a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.label)}</a></li>`).join(""));
+
+  document.getElementById("contactCards").insertAdjacentHTML("beforeend", SOCIALS.map(x => `
+    <a class="surface-card" href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">
+      <p class="k">${esc(x.label)}</p><p class="v">${esc(shortUrl(x.url))}</p>
+    </a>`).join(""));
 
   // Header scroll state
   const header = document.getElementById("siteHeader");
@@ -841,6 +931,38 @@
 
   // Footer year
   document.getElementById("footerYear").textContent = `© ${new Date().getFullYear()} Rohan Vinod Sonkar`;
+
+  // Resume download — verifies the PDF exists and downloads it; shows a clear message if it doesn't
+  const toast = document.getElementById("toast");
+  let toastTimer;
+  const showToast = (html) => {
+    toast.innerHTML = html;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 7000);
+  };
+  document.querySelectorAll("a[data-resume]").forEach(link => {
+    link.addEventListener("click", async (e) => {
+      if (!/^https?:$/.test(location.protocol)) return; // opened as a local file: let the browser handle it
+      e.preventDefault();
+      try {
+        const res = await fetch(link.href, { cache: "no-store" });
+        const type = res.headers.get("content-type") || "";
+        if (!res.ok || type.includes("text/html")) throw new Error("resume.pdf not found on server"); // an HTML reply means the host returned an error/fallback page
+        const url = URL.createObjectURL(await res.blob());
+        const tmp = document.createElement("a");
+        tmp.href = url;
+        tmp.download = "Rohan_Sonkar_Resume.pdf";
+        document.body.appendChild(tmp);
+        tmp.click();
+        tmp.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1500);
+      } catch (err) {
+        console.warn("Resume download failed:", err);
+        showToast('The resume isn’t available right now. Please <a href="mailto:rohanvsonkar@gmail.com?subject=Resume%20request">email me</a> and I’ll send it over.');
+      }
+    });
+  });
 </script>
 </body>
 </html>
