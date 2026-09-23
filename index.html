@@ -1,968 +1,2179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Rohan Vinod Sonkar — CCNA, RHCSA & AWS Network Engineer</title>
-<meta name="description" content="Portfolio of Rohan Vinod Sonkar — CCNA, RHCSA and AWS certified. Enterprise network design, hardened Linux servers, and a full-stack scalable AWS deployment with VPC, RDS, Lambda and CloudFormation." />
-<meta property="og:title" content="Rohan Vinod Sonkar — CCNA, RHCSA & AWS Network Engineer" />
-<meta property="og:description" content="Enterprise network design, Linux administration and a full-stack AWS cloud deployment — projects, skills, certifications and resume." />
-<meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary_large_image" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Rohan Vinod Sonkar — CCNA, RHCSA & AWS certified Network, Cloud & Linux Administrator. Portfolio with projects, skills, certifications, education and experience.">
+<title>Rohan Vinod Sonkar | Network, Cloud & Linux Administrator</title>
+
+<!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Icons are inline SVG below — no external icon-font dependency -->
 
 <style>
-  :root {
-    --background: #070b12;
-    --foreground: #eaf1fb;
-    --muted-foreground: #93a2b8;
-    --border: #1d2735;
-    --secondary: #101827;
-    --primary: #35d4c7;
-    --primary-foreground: #04120f;
-    --accent: #6c8cff;
-    --cyan: #35d4c7;
-    --gradient-brand: linear-gradient(135deg, #35d4c7 0%, #6c8cff 100%);
-    --shadow-glow: 0 0 40px rgba(53, 212, 199, 0.35);
-  }
 
-  * { box-sizing: border-box; }
+/* =========================================================
+   GLOBAL
+========================================================= */
 
-  html { scroll-behavior: smooth; }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
 
-  body {
-    margin: 0;
-    background: var(--background);
-    color: var(--foreground);
-    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
+:root{
+    --bg:#030712;
+    --bg2:#07111f;
+    --cyan:#00eaff;
+    --blue:#4d7cff;
+    --purple:#9b5cff;
+    --text:#f5f7ff;
+    --muted:#9ba8bd;
+    --glass:rgba(255,255,255,.055);
+    --border:rgba(255,255,255,.12);
+}
 
-  .font-display { font-family: 'Space Grotesk', 'Inter', sans-serif; }
-  .font-mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+body{
+    font-family:"Inter",sans-serif;
+    background:
+        radial-gradient(circle at 20% 20%,rgba(0,234,255,.09),transparent 25%),
+        radial-gradient(circle at 80% 30%,rgba(155,92,255,.10),transparent 25%),
+        linear-gradient(135deg,#02050c,#07111f 50%,#02050c);
+    color:var(--text);
+    overflow-x:hidden;
+}
 
-  a { color: inherit; text-decoration: none; }
-  ul { list-style: none; margin: 0; padding: 0; }
+a{
+    text-decoration:none;
+    color:inherit;
+}
 
-  .wrap { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+section{
+    position:relative;
+    padding:110px 7%;
+    z-index:2;
+}
 
-  /* Header */
-  header {
-    position: fixed;
-    inset: 0 0 auto 0;
-    z-index: 50;
-    border-bottom: 1px solid transparent;
-    transition: background-color .3s, border-color .3s;
-  }
-  header.scrolled {
-    border-color: var(--border);
-    background: rgba(7, 11, 18, 0.82);
-    backdrop-filter: blur(18px);
-  }
-  .header-inner {
-    max-width: 72rem;
-    margin: 0 auto;
-    padding: 1rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .logo {
-    font-size: .875rem;
-    font-weight: 700;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-  }
-  .logo span { color: var(--primary); }
+.container{
+    max-width:1250px;
+    margin:auto;
+}
 
-  nav.desktop-nav {
-    display: none;
-    align-items: center;
-    gap: 1.75rem;
-  }
-  @media (min-width: 768px) {
-    nav.desktop-nav { display: flex; }
-    .menu-btn { display: none !important; }
-  }
-  nav.desktop-nav a.nav-link {
-    font-size: 11px;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    color: var(--muted-foreground);
-    transition: color .2s;
-  }
-  nav.desktop-nav a.nav-link:hover { color: var(--primary); }
+.section-title{
+    text-align:center;
+    margin-bottom:60px;
+}
 
-  .btn-outline, .btn-brand {
-    display: inline-block;
-    border-radius: 999px;
-    padding: .6rem 1.1rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    cursor: pointer;
-    border: 1px solid var(--border);
-    transition: border-color .2s, background-color .2s, transform .15s;
-  }
-  .btn-outline { background: transparent; color: var(--foreground); }
-  .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
-  .btn-brand {
-    background: var(--gradient-brand);
-    color: var(--primary-foreground);
-    border: none;
-  }
-  .btn-brand:hover { transform: translateY(-1px); box-shadow: var(--shadow-glow); }
+.section-title span{
+    color:var(--cyan);
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:4px;
+    text-transform:uppercase;
+}
 
-  .menu-btn { display: inline-block; }
+.section-title h2{
+    font-size:clamp(35px,5vw,60px);
+    margin-top:10px;
+    background:linear-gradient(90deg,#fff,var(--cyan),#fff);
+    -webkit-background-clip:text;
+    color:transparent;
+}
 
-  .mobile-nav {
-    display: none;
-    border-top: 1px solid var(--border);
-    background: rgba(7, 11, 18, 0.97);
-    padding: 1rem 1.5rem;
-    backdrop-filter: blur(18px);
-  }
-  .mobile-nav.open { display: block; }
-  .mobile-nav ul { display: grid; gap: .75rem; }
-  .mobile-nav a {
-    font-size: 12px;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    color: var(--muted-foreground);
-  }
-  .mobile-nav a.resume-link { color: var(--primary); }
-  @media (min-width: 768px) { .mobile-nav { display: none !important; } }
+/* =========================================================
+   3D CANVAS
+========================================================= */
 
-  /* Hero */
-  .grid-backdrop {
-    position: relative;
-    overflow: hidden;
-    padding: 8.5rem 1.5rem 4rem;
-    background-image:
-      linear-gradient(rgba(53,212,199,0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(53,212,199,0.06) 1px, transparent 1px);
-    background-size: 42px 42px;
-  }
-  @media (min-width: 768px) { .grid-backdrop { padding: 10rem 1.5rem 6rem; } }
+#three-bg{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    pointer-events:none;
+}
 
-  .hero-grid {
-    max-width: 72rem;
-    margin: 0 auto;
-    display: grid;
-    gap: 3.5rem;
-    align-items: center;
-  }
-  @media (min-width: 1024px) {
-    .hero-grid { grid-template-columns: 1.15fr .85fr; }
-  }
+/* =========================================================
+   NAVBAR
+========================================================= */
 
-  .chip {
-    display: inline-block;
-    border: 1px solid var(--border);
-    background: var(--secondary);
-    border-radius: 999px;
-    padding: .35rem .9rem;
-    font-size: 11px;
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: .12em;
-    color: var(--muted-foreground);
-  }
+.navbar{
+    position:fixed;
+    top:18px;
+    left:50%;
+    transform:translateX(-50%);
+    width:90%;
+    max-width:1200px;
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(5,12,25,.55);
+    backdrop-filter:blur(18px);
+    border:1px solid var(--border);
+    border-radius:50px;
+    z-index:1000;
+    box-shadow:0 10px 40px rgba(0,0,0,.35);
+}
 
-  .text-gradient {
-    background: var(--gradient-brand);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
+.logo{
+    font-size:18px;
+    font-weight:800;
+    color:white;
+    white-space:nowrap;
+}
 
-  h1.hero-name {
-    margin: 1.5rem 0 0;
-    font-size: 2.5rem;
-    line-height: 1.05;
-    font-weight: 800;
-  }
-  @media (min-width: 640px) { h1.hero-name { font-size: 3rem; } }
-  @media (min-width: 768px) { h1.hero-name { font-size: 3.75rem; } }
+.logo span{
+    color:var(--cyan);
+}
 
-  .hero-role {
-    margin-top: 1.25rem;
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: rgba(234,241,251,0.85);
-  }
-  .hero-desc {
-    margin-top: 1rem;
-    max-width: 36rem;
-    line-height: 1.7;
-    color: var(--muted-foreground);
-  }
-  .hero-actions { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: .75rem; }
-  .hero-actions a { padding: .8rem 1.5rem; }
+.nav-links{
+    display:flex;
+    gap:18px;
+    list-style:none;
+}
 
-  .hero-contacts {
-    margin-top: 2rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.75rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--muted-foreground);
-  }
+.nav-links a{
+    color:#cbd5e1;
+    font-size:14px;
+    transition:.3s;
+}
 
-  .hero-visual { position: relative; display: flex; align-items: center; justify-content: center; }
-  .hero-orb-wrap { position: relative; width: 18rem; height: 18rem; display: flex; align-items: center; justify-content: center; }
-  @media (min-width: 640px) { .hero-orb-wrap { width: 20rem; height: 20rem; } }
+.nav-links a:hover{
+    color:var(--cyan);
+    text-shadow:0 0 15px var(--cyan);
+}
 
-  .ripple-ring {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    border: 1px solid rgba(53,212,199,0.35);
-    animation: ripple 3.6s ease-out infinite;
-  }
-  @keyframes ripple {
-    0% { transform: scale(.55); opacity: .9; }
-    100% { transform: scale(1.15); opacity: 0; }
-  }
+.menu-btn{
+    display:none;
+    font-size:22px;
+    cursor:pointer;
+}
 
-  .hero-orb {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 11rem;
-    height: 11rem;
-    border-radius: 50%;
-    background: var(--gradient-brand);
-    color: var(--primary-foreground);
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 3rem;
-    font-weight: 800;
-    box-shadow: var(--shadow-glow);
-  }
-  @media (min-width: 640px) { .hero-orb { width: 12rem; height: 12rem; } }
-  .hero-orb span {
-    position: absolute;
-    bottom: 1.5rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: .22em;
-  }
+/* =========================================================
+   HERO
+========================================================= */
 
-  .surface-card {
-    border: 1px solid var(--border);
-    background: var(--secondary);
-    border-radius: 1rem;
-  }
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding-top:130px;
+}
 
-  .hero-float {
-    position: absolute;
-    bottom: -2.5rem;
-    right: -.5rem;
-    width: 15rem;
-    padding: 1.25rem;
-    animation: float 5s ease-in-out infinite;
-  }
-  @media (min-width: 640px) { .hero-float { right: -1.5rem; } }
-  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.hero-content{
+    max-width:800px;
+}
 
-  .stats-grid {
-    max-width: 72rem;
-    margin: 5rem auto 0;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr;
-  }
-  @media (min-width: 640px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 1024px) { .stats-grid { grid-template-columns: repeat(5, 1fr); } }
-  .stat-card { padding: 1.5rem; }
-  .stat-value { font-family: 'Space Grotesk', sans-serif; font-size: 1.875rem; font-weight: 800; color: var(--primary); }
-  .stat-label { margin-top: .25rem; font-size: .875rem; color: var(--muted-foreground); }
+.hero-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 18px;
+    border:1px solid rgba(0,234,255,.3);
+    border-radius:50px;
+    background:rgba(0,234,255,.05);
+    color:var(--cyan);
+    font-size:13px;
+    margin-bottom:25px;
+}
 
-  /* Marquee */
-  .surface-accent { background: var(--secondary); border: 1px solid var(--border); }
-  .marquee-outer { overflow: hidden; border-left: 0; border-right: 0; padding: 1rem 0; }
-  .marquee-track { display: flex; width: max-content; animation: marquee 30s linear infinite; }
-  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  .marquee-copy { display: flex; align-items: center; flex-shrink: 0; }
-  .marquee-item {
-    margin: 0 1.5rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--muted-foreground);
-  }
-  .marquee-item .dot { margin-left: 1.5rem; color: var(--primary); }
+.status-dot{
+    width:8px;
+    height:8px;
+    background:#00ff9d;
+    border-radius:50%;
+    box-shadow:0 0 15px #00ff9d;
+}
 
-  /* Sections */
-  section.section {
-    max-width: 72rem;
-    margin: 0 auto;
-    padding: 5rem 1.5rem;
-    scroll-margin-top: 6rem;
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity .6s ease, transform .6s ease;
-  }
-  section.section.visible { opacity: 1; transform: translateY(0); }
-  @media (min-width: 768px) { section.section { padding: 6rem 1.5rem; } }
+.hero h1{
+    font-size:clamp(55px,9vw,110px);
+    line-height:.95;
+    font-weight:800;
+    letter-spacing:-5px;
+}
 
-  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: var(--primary); }
-  .section-title { margin: .75rem 0 0; font-size: 1.875rem; font-weight: 700; }
-  .section-title .hl { color: var(--primary); }
-  @media (min-width: 768px) { .section-title { font-size: 2.25rem; } }
-  .rule { margin: 1rem 0 2.5rem; height: 3px; width: 4rem; border-radius: 999px; background: var(--gradient-brand); }
+.hero h1 .gradient{
+    background:linear-gradient(90deg,var(--cyan),#6f8cff,var(--purple));
+    -webkit-background-clip:text;
+    color:transparent;
+}
 
-  /* About */
-  .about-grid { display: grid; gap: 1.5rem; }
-  @media (min-width: 1024px) { .about-grid { grid-template-columns: 1.1fr .9fr; } }
-  .card-pad { padding: 1.75rem; }
-  .about-copy { line-height: 1.7; color: var(--muted-foreground); }
-  .about-tags { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: .5rem; }
-  .about-meta { margin-top: 1.75rem; display: grid; gap: .75rem; grid-template-columns: 1fr; }
-  @media (min-width: 640px) { .about-meta { grid-template-columns: repeat(3,1fr); } }
-  .about-meta-item { border-radius: .75rem; border: 1px solid var(--border); background: rgba(255,255,255,0.02); padding: 1rem; }
-  .about-meta-item .k { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--primary); }
-  .about-meta-item .v { margin-top: .25rem; font-size: .875rem; color: rgba(234,241,251,0.9); }
+.hero h2{
+    margin-top:25px;
+    font-size:clamp(20px,3vw,34px);
+    color:#d7deea;
+}
 
-  .cert-title { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--primary); }
-  .cert-list { margin-top: 1.25rem; display: grid; gap: 1rem; }
-  .cert-item { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
-  .cert-item:last-child { border-bottom: 0; padding-bottom: 0; }
-  .cert-name { font-size: .875rem; font-weight: 600; }
-  .cert-org { font-size: .75rem; color: var(--muted-foreground); }
-  .cert-year { font-family: 'JetBrains Mono', monospace; font-size: .75rem; color: var(--primary); }
+.hero p{
+    margin-top:22px;
+    max-width:650px;
+    color:var(--muted);
+    font-size:17px;
+    line-height:1.8;
+}
 
-  /* Skills */
-  .skills-grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
-  @media (min-width: 768px) { .skills-grid { grid-template-columns: 1fr 1fr; } }
-  .skill-group h3 { font-size: 1.125rem; font-weight: 700; margin: 0; }
-  .divider { margin-top: .75rem; height: 1px; width: 100%; background: var(--border); }
-  .skill-items { margin-top: 1rem; display: grid; gap: .6rem; }
-  .skill-items li { display: flex; gap: .75rem; font-size: .875rem; color: var(--muted-foreground); }
-  .skill-items li .dot { margin-top: .45rem; height: .35rem; width: .35rem; flex-shrink: 0; border-radius: 999px; background: var(--primary); }
+.hero-buttons{
+    display:flex;
+    gap:15px;
+    margin-top:35px;
+    flex-wrap:wrap;
+}
 
-  /* Projects */
-  .projects-grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
-  @media (min-width: 768px) { .projects-grid { grid-template-columns: 1fr 1fr; } }
-  .project-index { font-family: 'JetBrains Mono', monospace; font-size: 3rem; font-weight: 700; color: rgba(53,212,199,0.15); }
-  .project-title { margin-top: .5rem; font-size: 1.25rem; font-weight: 700; }
-  .project-stack { margin-top: .25rem; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--primary); }
-  .project-points { margin-top: 1.25rem; display: grid; gap: .6rem; }
-  .project-points li { display: flex; gap: .75rem; font-size: .875rem; line-height: 1.6; color: var(--muted-foreground); }
-  .project-points li .dot { margin-top: .45rem; height: .35rem; width: .35rem; flex-shrink: 0; border-radius: 999px; background: var(--accent); }
-  .project-tags { margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: .5rem; }
-  .project-featured { grid-column: 1 / -1; }
-  .project-gallery { margin-top: 1.25rem; }
-  .project-gallery .project-diagram { margin-top: 0; }
-  .project-diagram.light { background: #fff; }
-  .gallery-fig { display: none; }
-  .gallery-fig.active { display: block; }
-  .gallery-tabs { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: .75rem; }
-  .gallery-tab {
-    cursor: pointer;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--muted-foreground);
-    border-radius: 999px;
-    padding: .4rem .9rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: .08em;
-    transition: border-color .2s, color .2s, background-color .2s;
-  }
-  .gallery-tab:hover { color: var(--foreground); border-color: var(--primary); }
-  .gallery-tab[aria-pressed="true"] { color: var(--primary-foreground); background: var(--primary); border-color: var(--primary); }
-  .gallery-tab:focus-visible, .btn-outline:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
-  .project-links { margin-top: 1.25rem; }
-  .project-diagram {
-    margin-top: 1.25rem;
-    width: 100%;
-    height: auto;
-    border-radius: .75rem;
-    border: 1px solid var(--border);
-    display: block;
-  }
+.btn{
+    padding:15px 25px;
+    border-radius:12px;
+    font-weight:700;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    transition:.4s;
+    border:1px solid var(--border);
+}
 
-  /* Experience */
-  .exp-grid { display: grid; gap: 1.5rem; }
-  @media (min-width: 1024px) { .exp-grid { grid-template-columns: 1.1fr .9fr; } }
-  .timeline { position: relative; margin: 0; padding-left: 1.75rem; border-left: 1px solid var(--border); display: grid; gap: 2.25rem; }
-  .timeline li { position: relative; }
-  .timeline li .node {
-    position: absolute; top: .35rem; left: -34px;
-    height: .75rem; width: .75rem; border-radius: 999px;
-    background: var(--primary); box-shadow: 0 0 12px var(--cyan);
-  }
-  .job-role { font-size: 1.125rem; font-weight: 700; margin: 0; }
-  .job-org { font-size: .875rem; font-weight: 600; color: var(--primary); margin: 0; }
-  .job-period { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted-foreground); }
-  .job-points { margin-top: .75rem; display: grid; gap: .5rem; }
-  .job-points li { display: flex; gap: .75rem; font-size: .875rem; color: var(--muted-foreground); }
-  .job-points li .dot { margin-top: .45rem; height: .35rem; width: .35rem; flex-shrink: 0; border-radius: 999px; background: var(--accent); }
+.btn-primary{
+    background:linear-gradient(135deg,var(--cyan),var(--blue));
+    color:#001019;
+    box-shadow:0 0 30px rgba(0,234,255,.25);
+}
 
-  .strengths-list { margin-top: 1.25rem; display: grid; gap: 1rem; }
-  .strengths-list li { font-size: .875rem; line-height: 1.7; color: var(--muted-foreground); }
+.btn-secondary{
+    background:rgba(255,255,255,.05);
+    color:white;
+}
 
-  /* Education */
-  .edu-grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
-  @media (min-width: 768px) { .edu-grid { grid-template-columns: 1fr 1fr; } }
-  .edu-card { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.25rem; padding: 1.5rem; }
-  .edu-degree { font-size: 1rem; font-weight: 700; margin: 0; }
-  .edu-school { margin-top: .25rem; font-size: .875rem; color: var(--muted-foreground); }
-  .edu-result { font-family: 'JetBrains Mono', monospace; font-size: .875rem; font-weight: 700; color: var(--primary); text-align: right; }
-  .edu-year { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted-foreground); text-align: right; }
+.btn:hover{
+    transform:translateY(-5px) scale(1.03);
+}
 
-  /* Contact */
-  .contact-panel { display: grid; align-items: center; gap: 2.5rem; border-radius: 1.5rem; padding: 2rem; }
-  @media (min-width: 1024px) { .contact-panel { grid-template-columns: .8fr 1.2fr; padding: 3rem; } }
-  .contact-orb-wrap { position: relative; margin: 0 auto; display: flex; height: 14rem; width: 14rem; align-items: center; justify-content: center; }
-  .contact-orb { display: flex; height: 8rem; width: 8rem; align-items: center; justify-content: center; border-radius: 999px; font-family: 'Space Grotesk', sans-serif; font-size: 2.25rem; font-weight: 800; color: var(--primary-foreground); background: var(--gradient-brand); }
-  .contact-heading { font-size: 1.5rem; font-weight: 700; margin: 0; }
-  .contact-copy { margin-top: .75rem; line-height: 1.7; color: var(--muted-foreground); }
-  .contact-cards { margin-top: 1.75rem; display: grid; gap: .75rem; grid-template-columns: 1fr; }
-  @media (min-width: 640px) { .contact-cards { grid-template-columns: 1fr 1fr; } }
-  .contact-cards a { display: block; padding: 1.25rem; }
-  .contact-cards .k { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--primary); }
-  .contact-cards .v { margin-top: .25rem; font-size: .875rem; }
-  .contact-actions { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: .75rem; }
-  .contact-actions a { padding: .8rem 1.5rem; }
+.hero-contacts{
+    display:flex;
+    flex-wrap:wrap;
+    gap:25px;
+    margin-top:30px;
+    font-size:13px;
+    color:var(--muted);
+}
 
-  footer { border-top: 1px solid var(--border); padding: 2rem 1.5rem; }
-  .footer-inner {
-    max-width: 72rem; margin: 0 auto;
-    display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: .75rem;
-    text-align: center;
-    font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-foreground);
-  }
-  @media (min-width: 640px) { .footer-inner { flex-direction: row; text-align: left; } }
+.hero-contacts a{
+    transition:.3s;
+}
 
-  .hero-contacts a { transition: color .2s; }
-  .hero-contacts a:hover { color: var(--primary); }
-  @media (min-width: 640px) { .contact-cards a:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+.hero-contacts a:hover{
+    color:var(--cyan);
+}
 
-  /* Toast */
-  .toast {
-    position: fixed; left: 50%; bottom: 1.5rem; z-index: 100;
-    transform: translate(-50%, 1rem); opacity: 0; pointer-events: none;
-    max-width: calc(100% - 2rem);
-    padding: .85rem 1.25rem;
-    border: 1px solid var(--border); border-radius: .75rem;
-    background: var(--secondary); color: var(--foreground);
-    font-size: .875rem; line-height: 1.5; text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,.4);
-    transition: opacity .25s, transform .25s;
-  }
-  .toast.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
-  .toast a { color: var(--primary); text-decoration: underline; }
+.ico-inline{
+    width:14px;
+    height:14px;
+    vertical-align:-2px;
+    color:var(--cyan);
+    margin-right:4px;
+}
+
+.ico{
+    width:1em;
+    height:1em;
+    display:inline-block;
+    vertical-align:-0.15em;
+    flex-shrink:0;
+}
+
+/* =========================================================
+   3D FLOATING ORBS
+========================================================= */
+
+.orb{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(1px);
+    pointer-events:none;
+}
+
+.orb1{
+    width:300px;
+    height:300px;
+    right:8%;
+    top:25%;
+    background:radial-gradient(circle at 35% 30%,rgba(0,234,255,.35),rgba(0,70,120,.08),transparent 70%);
+    animation:float 7s ease-in-out infinite;
+}
+
+.orb2{
+    width:220px;
+    height:220px;
+    right:25%;
+    bottom:12%;
+    background:radial-gradient(circle,rgba(155,92,255,.25),transparent 70%);
+    animation:float 9s ease-in-out infinite reverse;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0) rotate(0deg)}
+    50%{transform:translateY(-35px) rotate(10deg)}
+}
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1.2fr;
+    gap:50px;
+    align-items:center;
+}
+
+.profile-card{
+    min-height:420px;
+    border:1px solid var(--border);
+    border-radius:30px;
+    background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.015));
+    backdrop-filter:blur(20px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    transform-style:preserve-3d;
+    transition:.5s;
+    box-shadow:0 30px 80px rgba(0,0,0,.4);
+}
+
+.profile-card:hover{
+    transform:perspective(1000px) rotateY(-8deg) rotateX(5deg);
+}
+
+.profile-icon{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:80px;
+    color:var(--cyan);
+    background:radial-gradient(circle,rgba(0,234,255,.15),rgba(0,234,255,.02));
+    border:1px solid rgba(0,234,255,.35);
+    box-shadow:
+        0 0 50px rgba(0,234,255,.2),
+        inset 0 0 40px rgba(0,234,255,.08);
+    transform:translateZ(60px);
+}
+
+.about-text h3{
+    font-size:35px;
+    margin-bottom:20px;
+}
+
+.about-text p{
+    color:var(--muted);
+    line-height:1.9;
+    margin-bottom:20px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-top:30px;
+}
+
+.stat{
+    padding:20px;
+    border-radius:16px;
+    background:var(--glass);
+    border:1px solid var(--border);
+    text-align:center;
+}
+
+.stat strong{
+    display:block;
+    font-size:28px;
+    color:var(--cyan);
+}
+
+.stat span{
+    color:var(--muted);
+    font-size:12px;
+}
+
+/* =========================================================
+   SKILLS
+========================================================= */
+
+.skills-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+    perspective:1200px;
+}
+
+.skill-card{
+    min-height:190px;
+    padding:30px 20px;
+    text-align:center;
+    background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.025));
+    border:1px solid var(--border);
+    border-radius:22px;
+    backdrop-filter:blur(15px);
+    transform-style:preserve-3d;
+    transition:.5s;
+}
+
+.skill-card:hover{
+    transform:translateY(-12px) rotateX(7deg) rotateY(-7deg);
+    border-color:rgba(0,234,255,.45);
+    box-shadow:0 25px 60px rgba(0,234,255,.12);
+}
+
+.skill-icon{
+    font-size:45px;
+    color:var(--cyan);
+    margin-bottom:18px;
+    transform:translateZ(35px);
+}
+
+.skill-card h3{
+    font-size:17px;
+}
+
+.skill-card p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:8px;
+}
+
+/* =========================================================
+   PROJECTS
+========================================================= */
+
+.projects-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+    perspective:1200px;
+}
+
+.project-card{
+    position:relative;
+    min-height:370px;
+    padding:30px;
+    overflow:hidden;
+    border-radius:25px;
+    border:1px solid var(--border);
+    background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+    backdrop-filter:blur(18px);
+    transform-style:preserve-3d;
+    transition:.5s;
+    display:flex;
+    flex-direction:column;
+}
+
+.project-card:hover{
+    transform:rotateX(6deg) rotateY(-7deg) translateY(-10px);
+    border-color:rgba(0,234,255,.4);
+    box-shadow:0 30px 70px rgba(0,0,0,.5);
+}
+
+.project-number{
+    font-size:70px;
+    font-weight:800;
+    position:absolute;
+    right:20px;
+    top:5px;
+    color:rgba(255,255,255,.035);
+}
+
+.project-icon{
+    font-size:40px;
+    color:var(--cyan);
+    margin-bottom:25px;
+    transform:translateZ(35px);
+}
+
+.project-card h3{
+    font-size:22px;
+    margin-bottom:15px;
+    transform:translateZ(30px);
+}
+
+.project-image{
+    width:100%;
+    border-radius:14px;
+    border:1px solid var(--border);
+    margin-bottom:16px;
+    display:block;
+    transform:translateZ(15px);
+}
+
+.project-card p{
+    color:var(--muted);
+    line-height:1.7;
+    font-size:14px;
+    transform:translateZ(20px);
+}
+
+.tags{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:22px;
+}
+
+.tag{
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:10px;
+    background:rgba(0,234,255,.07);
+    border:1px solid rgba(0,234,255,.15);
+    color:var(--cyan);
+}
+
+.project-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:16px;
+    position:relative;
+    transform:translateZ(25px);
+}
+
+.project-links a{
+    font-size:11px;
+    font-weight:700;
+    padding:8px 12px;
+    border-radius:10px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.05);
+    color:#cbd5e1;
+    transition:.3s;
+}
+
+.project-links a:hover{
+    color:var(--cyan);
+    border-color:rgba(0,234,255,.4);
+    transform:translateY(-3px);
+}
+
+/* =========================================================
+   CERTIFICATIONS
+========================================================= */
+
+.cert-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:18px;
+}
+
+.cert{
+    min-height:180px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
+    border-radius:20px;
+    background:var(--glass);
+    border:1px solid var(--border);
+    transition:.4s;
+}
+
+.cert:hover{
+    transform:translateY(-10px) rotateY(8deg);
+    box-shadow:0 20px 50px rgba(0,234,255,.12);
+}
+
+.cert .ico{
+    font-size:38px;
+    color:var(--cyan);
+    margin-bottom:18px;
+}
+
+.cert h3{
+    font-size:15px;
+}
+
+.cert p{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:8px;
+}
+
+/* =========================================================
+   EDUCATION
+========================================================= */
+
+.edu-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.edu-card{
+    padding:26px 28px;
+    border-radius:20px;
+    background:var(--glass);
+    border:1px solid var(--border);
+    backdrop-filter:blur(15px);
+    transition:.4s;
+}
+
+.edu-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(0,234,255,.35);
+    box-shadow:0 20px 50px rgba(0,234,255,.1);
+}
+
+.edu-top{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.edu-top h3{
+    font-size:19px;
+}
+
+.edu-result{
+    font-family:monospace;
+    font-weight:700;
+    color:var(--cyan);
+    font-size:14px;
+    white-space:nowrap;
+}
+
+.edu-school{
+    color:var(--muted);
+    margin-top:8px;
+    font-size:14px;
+}
+
+.edu-year{
+    display:inline-block;
+    margin-top:12px;
+    font-size:11px;
+    color:var(--muted);
+    font-family:monospace;
+}
+
+/* =========================================================
+   EXPERIENCE
+========================================================= */
+
+.timeline{
+    max-width:850px;
+    margin:auto;
+    position:relative;
+}
+
+.timeline::before{
+    content:"";
+    position:absolute;
+    left:20px;
+    top:0;
+    bottom:0;
+    width:1px;
+    background:linear-gradient(var(--cyan),transparent);
+}
+
+.timeline-item{
+    position:relative;
+    padding-left:65px;
+    margin-bottom:50px;
+}
+
+.timeline-dot{
+    position:absolute;
+    left:11px;
+    top:5px;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:var(--cyan);
+    box-shadow:0 0 20px var(--cyan);
+}
+
+.timeline-card{
+    padding:30px;
+    border-radius:20px;
+    border:1px solid var(--border);
+    background:var(--glass);
+    backdrop-filter:blur(15px);
+}
+
+.timeline-card h3{
+    font-size:23px;
+}
+
+.timeline-card .company{
+    color:var(--cyan);
+    margin:8px 0 15px;
+}
+
+/* =========================================================
+   KEY STRENGTHS
+========================================================= */
+
+.strengths-card{
+    max-width:850px;
+    margin:40px auto 0;
+    padding:30px;
+    border-radius:20px;
+    border:1px solid var(--border);
+    background:var(--glass);
+    backdrop-filter:blur(15px);
+    transition:.4s;
+}
+
+.strengths-card:hover{
+    border-color:rgba(0,234,255,.3);
+    box-shadow:0 20px 50px rgba(0,234,255,.08);
+}
+
+.strengths-card h3{
+    font-size:20px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.ico-heading{
+    display:inline-flex;
+    color:var(--cyan);
+    font-size:22px;
+}
+
+.strengths-list{
+    list-style:none;
+    display:grid;
+    gap:14px;
+}
+
+.strengths-list li{
+    position:relative;
+    padding-left:22px;
+    color:var(--muted);
+    font-size:14.5px;
+    line-height:1.7;
+}
+
+.strengths-list li::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:8px;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--cyan);
+    box-shadow:0 0 8px var(--cyan);
+}
+
+.timeline-card p{
+    color:var(--muted);
+    line-height:1.8;
+}
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact-box{
+    max-width:950px;
+    margin:auto;
+    padding:60px;
+    text-align:center;
+    border-radius:35px;
+    border:1px solid var(--border);
+    background:
+        radial-gradient(circle at center,rgba(0,234,255,.08),transparent 55%),
+        rgba(255,255,255,.04);
+    backdrop-filter:blur(20px);
+}
+
+.contact-box h2{
+    font-size:45px;
+}
+
+.contact-box p{
+    color:var(--muted);
+    margin:20px auto 35px;
+    max-width:600px;
+    line-height:1.8;
+}
+
+.socials{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.social{
+    width:50px;
+    height:50px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:15px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.05);
+    font-size:20px;
+    transition:.4s;
+}
+
+.social:hover{
+    color:var(--cyan);
+    transform:translateY(-7px) rotateY(15deg);
+    box-shadow:0 10px 30px rgba(0,234,255,.2);
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    text-align:center;
+    padding:35px 20px;
+    border-top:1px solid var(--border);
+    color:var(--muted);
+    font-size:13px;
+}
+
+footer span{
+    color:var(--cyan);
+}
+
+/* =========================================================
+   REVEAL ANIMATION
+========================================================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(60px);
+    transition:1s;
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1000px){
+
+    .nav-links{
+        gap:12px;
+    }
+
+    .nav-links a{
+        font-size:12.5px;
+    }
+
+    .logo{
+        font-size:16px;
+    }
+
+    .skills-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .projects-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .cert-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .about-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:700px){
+    .edu-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:700px){
+
+    section{
+        padding:80px 5%;
+    }
+
+    .navbar{
+        width:94%;
+    }
+
+    .logo{
+        font-size:14px;
+    }
+
+    .nav-links{
+        display:none;
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        padding:25px;
+        flex-direction:column;
+        background:rgba(5,12,25,.95);
+        border:1px solid var(--border);
+        border-radius:20px;
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .hero h1{
+        letter-spacing:-3px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .skills-grid,
+    .projects-grid{
+        grid-template-columns:1fr;
+    }
+
+    .cert-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .contact-box{
+        padding:35px 20px;
+    }
+
+    .contact-box h2{
+        font-size:32px;
+    }
+
+    .orb1{
+        width:180px;
+        height:180px;
+    }
+}
+
+@media(max-width:430px){
+
+    .cert-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+    }
+
+    .btn{
+        justify-content:center;
+    }
+}
+
+/* =========================================================
+   TOAST (resume download status)
+========================================================= */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:1.5rem;
+    z-index:2000;
+    transform:translate(-50%,1rem);
+    opacity:0;
+    pointer-events:none;
+    max-width:calc(100% - 2rem);
+    padding:.9rem 1.3rem;
+    border-radius:.9rem;
+    border:1px solid var(--border);
+    background:rgba(7,17,31,.95);
+    backdrop-filter:blur(15px);
+    color:var(--text);
+    font-size:.85rem;
+    line-height:1.5;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.5);
+    transition:opacity .25s, transform .25s;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
+    pointer-events:auto;
+}
+
+.toast a{
+    color:var(--cyan);
+    text-decoration:underline;
+}
+
 </style>
 </head>
+
 <body>
 
-<header id="siteHeader">
-  <div class="header-inner">
-    <a href="#top" class="logo">Rohan <span>Sonkar</span></a>
-    <nav class="desktop-nav">
-      <a class="nav-link" href="#about">About</a>
-      <a class="nav-link" href="#skills">Skills</a>
-      <a class="nav-link" href="#projects">Projects</a>
-      <a class="nav-link" href="#experience">Experience</a>
-      <a class="nav-link" href="#education">Education</a>
-      <a class="nav-link" href="#contact">Contact</a>
-      <a class="btn-outline" href="resume.pdf" download="Rohan_Sonkar_Resume.pdf" data-resume>Resume</a>
-    </nav>
-    <button type="button" class="btn-outline menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">Menu</button>
-  </div>
-  <nav class="mobile-nav" id="mobileNav">
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a class="resume-link" href="resume.pdf" download="Rohan_Sonkar_Resume.pdf" data-resume>Download Resume</a></li>
+<!-- =====================================================
+     3D BACKGROUND
+===================================================== -->
+
+<canvas id="three-bg"></canvas>
+
+<!-- Decorative 3D lights -->
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="navbar">
+
+    <a href="#home" class="logo">
+        Rohan Vinod <span>Sonkar</span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
     </ul>
-  </nav>
-</header>
 
-<main id="top">
-
-  <!-- HERO -->
-  <section class="grid-backdrop">
-    <div class="hero-grid">
-      <div>
-        <span class="chip">CCNA · RHCSA · AWS Certified</span>
-        <h1 class="hero-name text-gradient font-display">Rohan Vinod<br />Sonkar</h1>
-        <p class="hero-role">Network Engineer · Linux Administrator · AWS Cloud</p>
-        <p class="hero-desc">
-          IT professional building hands-on expertise in cloud infrastructure and enterprise
-          networking, backed by CCNA, RHCSA and AWS certifications. My work spans enterprise
-          network design (VLANs, OSPF, ACL security), hardened Linux server administration, and
-          full-stack AWS deployments — including load-balanced compute, managed databases,
-          serverless automation and infrastructure-as-code.
-        </p>
-        <div class="hero-actions">
-          <a class="btn-brand" href="mailto:rohanvsonkar@gmail.com">Hire Me</a>
-          <a class="btn-outline" href="resume.pdf" download="Rohan_Sonkar_Resume.pdf" data-resume>Download Resume</a>
-          <a class="btn-outline" href="#projects">View Projects</a>
-        </div>
-        <ul class="hero-contacts" id="heroContacts">
-          <li>Ambivali, Kalyan 421102</li>
-          <li>rohanvsonkar@gmail.com</li>
-          <li>+91 84540 21296</li>
-        </ul>
-      </div>
-
-      <div class="hero-visual">
-        <div class="hero-orb-wrap">
-          <span class="ripple-ring"></span>
-          <span class="ripple-ring" style="animation-delay:.9s"></span>
-          <span class="ripple-ring" style="animation-delay:1.8s"></span>
-          <div class="hero-orb">
-            RS
-            <span>CCNA · RHCSA · AWS</span>
-          </div>
-        </div>
-        <div class="surface-card hero-float">
-          <p class="font-mono" style="font-size:10px;letter-spacing:.2em;color:var(--primary);text-transform:uppercase;margin:0;">● Live network lab</p>
-          <p style="margin-top:.5rem;font-size:.75rem;line-height:1.6;color:var(--muted-foreground);">
-            <span style="font-weight:600;color:var(--foreground);">3-tier architecture</span> — VLANs,
-            inter-VLAN routing, OSPF, DHCP, NAT and ACLs, verified with ping, traceroute and IOS
-            show commands.
-          </p>
-          <div style="margin-top:.75rem;display:flex;gap:.4rem;">
-            <i style="height:.5rem;width:.5rem;border-radius:999px;background:var(--accent);"></i>
-            <i style="height:.5rem;width:.5rem;border-radius:999px;background:var(--primary);"></i>
-            <i style="height:.5rem;width:.5rem;border-radius:999px;background:rgba(147,162,184,.6);"></i>
-          </div>
-        </div>
-      </div>
+    <div class="menu-btn" id="menuBtn">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </div>
 
-    <div class="stats-grid" id="statsGrid"></div>
-  </section>
+</nav>
 
-  <!-- MARQUEE -->
-  <div class="surface-accent marquee-outer">
-    <div class="marquee-track" id="marqueeTrack"></div>
-  </div>
 
-  <!-- ABOUT -->
-  <section class="section" id="about">
-    <p class="eyebrow">01 — Profile</p>
-    <h2 class="section-title">Professional <span class="hl">Summary</span></h2>
-    <div class="rule"></div>
-    <div class="about-grid">
-      <div class="surface-card card-pad">
-        <p class="about-copy">
-          I hold CCNA for enterprise networking and network security, RHCSA for Linux systems
-          administration, and AWS Cloud Practitioner for cloud fundamentals. Beyond the certs, I've
-          built a full-stack AWS deployment covering VPC networking, load-balanced EC2, RDS,
-          serverless automation with Lambda/SNS/SQS, CloudFront delivery and CloudFormation IaC —
-          alongside multi-router enterprise designs in Cisco Packet Tracer and hardened RHEL
-          servers with SELinux and Firewalld. I bring this together with 5+ years of operational
-          and people-management experience — supervising staff, designing processes and
-          documenting everything carefully.
-        </p>
-        <div class="about-tags">
-          <span class="chip">OSI 7-Layer</span>
-          <span class="chip">TCP/IP</span>
-          <span class="chip">Subnetting VLSM/CIDR</span>
-          <span class="chip">IPv4 / IPv6</span>
-          <span class="chip">Linux CLI</span>
-          <span class="chip">Documentation</span>
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero" id="home">
+
+    <div class="container">
+
+        <div class="hero-content reveal">
+
+            <div class="hero-badge">
+                <span class="status-dot"></span>
+                Available for Network, Cloud & IT Opportunities
+            </div>
+
+            <h1>
+                Hi, I'm
+                <span class="gradient">Rohan</span>
+            </h1>
+
+            <h2>
+                Network Engineer · Linux Administrator · AWS Cloud
+            </h2>
+
+            <p>
+                CCNA, RHCSA and AWS Cloud Practitioner certified. I design enterprise
+                networks, harden Linux servers and build full-stack AWS deployments —
+                backed by 5+ years of operational and IT support experience.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#projects" class="btn btn-primary">
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>
+                    View Projects
+                </a>
+
+                <a href="resume.pdf" download="Rohan_Sonkar_Resume.pdf" class="btn btn-secondary" data-resume>
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 12v6M9.5 15.5 12 18l2.5-2.5"/></svg>
+                    Download Resume
+                </a>
+
+            </div>
+
+            <div class="hero-contacts">
+                <a href="mailto:rohanvsonkar@gmail.com"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 6.5 12 13 21 6.5"/></svg> rohanvsonkar@gmail.com</a>
+                <a href="tel:+918454021296"><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c0-1 1-2 2-2h2l2 5-2 2c1 3 3 5 6 6l2-2 5 2v2c0 1-1 2-2 2C10.6 20 4 13.4 4 5z"/></svg> +91 84540 21296</a>
+                <span><svg class="ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg> Ambivali, Kalyan 421102</span>
+                <a href="https://www.linkedin.com/in/rohanvsonkar" target="_blank"><svg class="ico-inline" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg> LinkedIn</a>
+                <a href="https://github.com/rohansonkar1206" target="_blank"><svg class="ico-inline" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.1 3.29 9.42 7.86 10.96.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.67.8.56A10.53 10.53 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5z"/></svg> GitHub</a>
+            </div>
+
         </div>
-        <div class="about-meta">
-          <div class="about-meta-item"><p class="k">Languages</p><p class="v">English · Hindi · Marathi</p></div>
-          <div class="about-meta-item"><p class="k">Location</p><p class="v">Ambivali, Kalyan 421102</p></div>
-          <div class="about-meta-item"><p class="k">Open to</p><p class="v">Network Engineering · Cloud Infrastructure · Linux SysAdmin</p></div>
-        </div>
-      </div>
 
-      <div class="surface-card card-pad">
-        <h3 class="cert-title">Certifications</h3>
-        <div class="cert-list" id="certList"></div>
-      </div>
     </div>
-  </section>
 
-  <!-- SKILLS -->
-  <section class="section" id="skills">
-    <p class="eyebrow">02 — Toolkit</p>
-    <h2 class="section-title">Technical <span class="hl">Skills</span></h2>
-    <div class="rule"></div>
-    <div class="skills-grid" id="skillsGrid"></div>
-  </section>
+</section>
 
-  <!-- PROJECTS -->
-  <section class="section" id="projects">
-    <p class="eyebrow">03 — Lab work</p>
-    <h2 class="section-title">Hands-on <span class="hl">Projects</span></h2>
-    <div class="rule"></div>
-    <div class="projects-grid" id="projectsGrid"></div>
-  </section>
 
-  <!-- EXPERIENCE -->
-  <section class="section" id="experience">
-    <p class="eyebrow">04 — Track record</p>
-    <h2 class="section-title">Work <span class="hl">Experience</span></h2>
-    <div class="rule"></div>
-    <div class="exp-grid">
-      <div class="surface-card card-pad">
-        <ol class="timeline" id="expTimeline"></ol>
-      </div>
-      <div class="surface-card card-pad">
-        <h3 class="cert-title">Key strengths</h3>
-        <ul class="strengths-list" id="strengthsList"></ul>
-      </div>
-    </div>
-  </section>
+<!-- =====================================================
+     ABOUT
+===================================================== -->
 
-  <!-- EDUCATION -->
-  <section class="section" id="education">
-    <p class="eyebrow">05 — Academics</p>
-    <h2 class="section-title">Education <span class="hl">& Results</span></h2>
-    <div class="rule"></div>
-    <div class="edu-grid" id="eduGrid"></div>
-  </section>
+<section id="about">
 
-  <!-- CONTACT -->
-  <section class="section" id="contact">
-    <p class="eyebrow">06 — Say hello</p>
-    <h2 class="section-title">Let's <span class="hl">Connect</span></h2>
-    <div class="rule"></div>
-    <div class="surface-accent contact-panel">
-      <div class="contact-orb-wrap">
-        <span class="ripple-ring"></span>
-        <span class="ripple-ring" style="animation-delay:1s"></span>
-        <div class="contact-orb">RS</div>
-      </div>
-      <div>
-        <h3 class="contact-heading">Let's build something reliable</h3>
-        <p class="contact-copy">
-          Available for Network Engineering, Cloud Infrastructure and Linux Systems Administration
-          work — full-time roles or project-based engagements. Reach out and I'll reply the same day.
-        </p>
-        <div class="contact-cards" id="contactCards">
-          <a class="surface-card" href="mailto:rohanvsonkar@gmail.com">
-            <p class="k">Email</p><p class="v">rohanvsonkar@gmail.com</p>
-          </a>
-          <a class="surface-card" href="tel:+918454021296">
-            <p class="k">Phone</p><p class="v">+91 84540 21296</p>
-          </a>
+    <div class="container">
+
+        <div class="section-title reveal">
+            <span>01 — About</span>
+            <h2>About Me</h2>
         </div>
-        <div class="contact-actions">
-          <a class="btn-brand" href="mailto:rohanvsonkar@gmail.com">Send an Email</a>
-          <a class="btn-outline" href="resume.pdf" download="Rohan_Sonkar_Resume.pdf" data-resume>Download Resume</a>
+
+        <div class="about-grid">
+
+            <div class="profile-card reveal">
+                <div class="profile-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:1em;height:1em;">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M4 20c0-3.5 3.5-6 8-6s8 2.5 8 6"/>
+                        <path d="M17.5 8.5c1.2.4 2 1.4 2 2.6 0 1.5-1.2 2.8-2.8 3"/>
+                        <path d="M19.5 5.5c.2-.1.5-.1.7 0"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="about-text reveal">
+
+                <h3>Building My Future in Cloud & Networking</h3>
+
+                <p>
+                    I hold CCNA for enterprise networking and network security, RHCSA
+                    for Linux systems administration, and AWS Cloud Practitioner for
+                    cloud fundamentals. Beyond the certs, I've built a full-stack AWS
+                    deployment covering VPC networking, load-balanced EC2, RDS,
+                    serverless automation with Lambda/SNS/SQS, CloudFront delivery
+                    and CloudFormation IaC.
+                </p>
+
+                <p>
+                    Alongside that, I've designed multi-router enterprise networks in
+                    Cisco Packet Tracer and hardened RHEL servers with SELinux and
+                    Firewalld — and I bring 5+ years of admin and IT support experience
+                    from Omtech Computer Education, where I supervised staff, managed
+                    records and supported desktops, LAN/Wi-Fi and user access.
+                </p>
+
+                <p>
+                    My goal is to combine that operational discipline with hands-on
+                    technical skill and build a career in Network, Cloud and Linux
+                    Administration.
+                </p>
+
+                <div class="stats">
+
+                    <div class="stat">
+                        <strong>3</strong>
+                        <span>Industry Certifications</span>
+                    </div>
+
+                    <div class="stat">
+                        <strong>5+</strong>
+                        <span>Years Admin & IT Support</span>
+                    </div>
+
+                    <div class="stat">
+                        <strong>14+</strong>
+                        <span>AWS Services Deployed</span>
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-      </div>
+
     </div>
-  </section>
 
-</main>
+</section>
 
-<footer>
-  <div class="footer-inner">
-    <p id="footerYear">© Rohan Vinod Sonkar</p>
-    <p>CCNA · RHCSA · AWS Cloud Practitioner</p>
-  </div>
-</footer>
 
+<!-- =====================================================
+     SKILLS
+===================================================== -->
+
+<section id="skills">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+            <span>02 — Expertise</span>
+            <h2>Technical Skills</h2>
+        </div>
+
+        <div class="skills-grid">
+
+            <div class="skill-card reveal">
+                <div class="skill-icon">
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 19a4.5 4.5 0 0 1-.5-8.98A6 6 0 0 1 17.6 8.03 4.5 4.5 0 0 1 17 19H6.5z"/></svg>
+                </div>
+                <h3>AWS Cloud</h3>
+                <p>EC2 • S3 • IAM • VPC • RDS • Lambda</p>
+            </div>
+
+            <div class="skill-card reveal">
+                <div class="skill-icon">
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l4 3-4 3M13 15h4"/></svg>
+                </div>
+                <h3>Linux / RHEL</h3>
+                <p>RHEL 7/8/9 • Users • Groups • LVM • SELinux • Systemd</p>
+            </div>
+
+            <div class="skill-card reveal">
+                <div class="skill-icon">
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M6 8v4M12 8v4M18 8v4"/><rect x="2" y="16" width="6" height="4" rx="1"/><rect x="9" y="16" width="6" height="4" rx="1"/><rect x="16" y="16" width="6" height="4" rx="1"/></svg>
+                </div>
+                <h3>Networking</h3>
+                <p>TCP/IP • IPv4 • IPv6 • Subnetting VLSM/CIDR • DHCP • DNS</p>
+            </div>
+
+            <div class="skill-card reveal">
+                <div class="skill-icon">
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg>
+                </div>
+                <h3>Cisco Switching</h3>
+                <p>VLAN • OSPF • NAT/PAT • ACL • STP/VTP • Inter-VLAN</p>
+            </div>
+
+            <div class="skill-card reveal">
+                <div class="skill-icon">
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l4 3-4 3M13 15h4"/></svg>
+                </div>
+                <h3>Bash & Automation</h3>
+                <p>Linux CLI • Cron • Shell Scripting • Automation</p>
+            </div>
+
+            <div class="skill-card reveal">
+                <div class="skill-icon">
+                    <svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.1 3.29 9.42 7.86 10.96.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.67.8.56A10.53 10.53 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5z"/></svg>
+                </div>
+                <h3>Git / GitHub</h3>
+                <p>Version Control • Repository Management</p>
+            </div>
+
+            <div class="skill-card reveal">
+                <div class="skill-icon">
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z"/><path d="M12 3v18"/></svg>
+                </div>
+                <h3>Security</h3>
+                <p>IAM • Security Groups • ACL • Firewalld • SELinux • WAF/KMS</p>
+            </div>
+
+            <div class="skill-card reveal">
+                <div class="skill-icon">
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 19a4.5 4.5 0 0 1-.5-8.98A6 6 0 0 1 17.6 8.03 4.5 4.5 0 0 1 17 19H6.5z"/></svg>
+                </div>
+                <h3>Cloud Architecture</h3>
+                <p>CloudFront • Route 53 • ALB • SNS/SQS • CloudFormation</p>
+            </div>
+
+            <div class="skill-card reveal">
+                <div class="skill-icon">
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6.5"/><path d="M20 20l-4.8-4.8"/><path d="M7.5 11.5v-2M10 11.5V7M12.5 11.5V9"/></svg>
+                </div>
+                <h3>Troubleshooting</h3>
+                <p>Ping • Traceroute • Wireshark • Cisco IOS show commands</p>
+            </div>
+
+            <div class="skill-card reveal">
+                <div class="skill-icon">
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg>
+                </div>
+                <h3>Lab Tools</h3>
+                <p>Packet Tracer • PuTTY • VirtualBox / VMware</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROJECTS
+===================================================== -->
+
+<section id="projects">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+            <span>03 — Portfolio</span>
+            <h2>Featured Projects</h2>
+        </div>
+
+        <div class="projects-grid">
+
+            <div class="project-card reveal">
+
+                <div class="project-number">01</div>
+
+                <div class="project-icon">
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 19a4.5 4.5 0 0 1-.5-8.98A6 6 0 0 1 17.6 8.03 4.5 4.5 0 0 1 17 19H6.5z"/></svg>
+                </div>
+
+                <h3>Scalable AWS Web Application</h3>
+
+                <img src="aws-architecture.svg" alt="Scalable AWS Web Application diagram" class="project-image" loading="lazy" />
+                <p>
+                    Full-stack blog app — custom VPC, load-balanced EC2 with RDS MySQL,
+                    Lambda/SNS/SQS event automation, CloudFront + Route 53 delivery,
+                    WAF/KMS security and a CloudFormation IaC template.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">VPC</span>
+                    <span class="tag">RDS</span>
+                    <span class="tag">Lambda</span>
+                    <span class="tag">CloudFormation</span>
+                </div>
+
+                <div class="project-links">
+                    <a href="aws-architecture.svg" target="_blank"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.8 7.3 10.5 16M16.2 7.3 13.5 16M8.2 6h7.6"/></svg> View Diagram</a>
+                    <a href="https://github.com/rohansonkar1206/aws-scalable-web-app" target="_blank"><svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.1 3.29 9.42 7.86 10.96.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.67.8.56A10.53 10.53 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5z"/></svg> GitHub</a>
+                </div>
+
+            </div>
+
+
+            <div class="project-card reveal">
+
+                <div class="project-number">02</div>
+
+                <div class="project-icon">
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M6 8v4M12 8v4M18 8v4"/><rect x="2" y="16" width="6" height="4" rx="1"/><rect x="9" y="16" width="6" height="4" rx="1"/><rect x="16" y="16" width="6" height="4" rx="1"/></svg>
+                </div>
+
+                <h3>Enterprise Network Design</h3>
+
+                <img src="network-design-diagram.png" alt="Enterprise Network Design diagram" class="project-image" loading="lazy" />
+                <p>
+                    Designed a 3-tier, multi-router enterprise network in Cisco Packet
+                    Tracer with VLAN segmentation, OSPF dynamic routing, DHCP, NAT and
+                    ACL security — verified with ping, traceroute and IOS show commands.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">Cisco</span>
+                    <span class="tag">OSPF</span>
+                    <span class="tag">VLAN</span>
+                    <span class="tag">ACL</span>
+                </div>
+
+                <div class="project-links">
+                    <a href="network-design-diagram.png" target="_blank"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.8 7.3 10.5 16M16.2 7.3 13.5 16M8.2 6h7.6"/></svg> View Diagram</a>
+                    <a href="https://github.com/rohansonkar1206/Enterprise-Network-Design" target="_blank"><svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.1 3.29 9.42 7.86 10.96.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.67.8.56A10.53 10.53 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5z"/></svg> GitHub</a>
+                </div>
+
+            </div>
+
+
+            <div class="project-card reveal">
+
+                <div class="project-number">03</div>
+
+                <div class="project-icon">
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg>
+                </div>
+
+                <h3>RHEL Administration Lab</h3>
+
+                <img src="rhel-lab-diagram.png" alt="RHEL Administration Lab diagram" class="project-image" loading="lazy" />
+                <p>
+                    Hardened RHEL servers from default install to a security-conscious
+                    baseline — SELinux enforcing mode, Firewalld policy, LVM storage,
+                    and 20+ real-world admin scenarios automated with Bash and Systemd.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">SELinux</span>
+                    <span class="tag">LVM</span>
+                    <span class="tag">Firewalld</span>
+                </div>
+
+                <div class="project-links">
+                    <a href="rhel-lab-diagram.png" target="_blank"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.8 7.3 10.5 16M16.2 7.3 13.5 16M8.2 6h7.6"/></svg> View Diagram</a>
+                    <a href="https://github.com/rohansonkar1206/Rhel-Admin-Lab" target="_blank"><svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.1 3.29 9.42 7.86 10.96.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.67.8.56A10.53 10.53 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5z"/></svg> GitHub</a>
+                </div>
+
+            </div>
+
+
+            <div class="project-card reveal">
+
+                <div class="project-number">04</div>
+
+                <div class="project-icon">
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7.8 7.3 10.5 16M16.2 7.3 13.5 16M8.2 6h7.6"/></svg>
+                </div>
+
+                <h3>OSPF Dynamic Routing</h3>
+
+                <p>
+                    Configured OSPF Area 0 across 5 routers for dynamic route
+                    advertisement and automatic failover — replacing static routing
+                    entirely and confirming full neighbor adjacency and convergence.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">OSPF Area 0</span>
+                    <span class="tag">Failover</span>
+                    <span class="tag">Convergence</span>
+                </div>
+
+            </div>
+
+
+            <div class="project-card reveal">
+
+                <div class="project-number">05</div>
+
+                <div class="project-icon">
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                </div>
+
+                <h3>Network Security With ACLs</h3>
+
+                <p>
+                    Filtered traffic by source IP, destination IP and protocol across
+                    3 departments — enforcing least-privilege access and validating
+                    every permit/deny rule through rigorous ping and IOS testing.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">Least Privilege</span>
+                    <span class="tag">Filtering</span>
+                    <span class="tag">Validation</span>
+                </div>
+
+            </div>
+
+
+            <div class="project-card reveal">
+
+                <div class="project-number">06</div>
+
+                <div class="project-icon">
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5 3 12l5 7M16 5l5 7-5 7"/></svg>
+                </div>
+
+                <h3>This 3D Portfolio</h3>
+
+                <p>
+                    This very site — a responsive, WebGL-powered portfolio built with
+                    HTML, CSS, JavaScript and Three.js, and deployed on AWS S3 with
+                    CloudFront.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">Three.js</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">AWS S3</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CERTIFICATIONS
+===================================================== -->
+
+<section id="certifications">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+            <span>04 — Credentials</span>
+            <h2>Certifications</h2>
+        </div>
+
+        <div class="cert-grid">
+
+            <div class="cert reveal">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 19a4.5 4.5 0 0 1-.5-8.98A6 6 0 0 1 17.6 8.03 4.5 4.5 0 0 1 17 19H6.5z"/></svg>
+                <h3>AWS Cloud Practitioner</h3>
+                <p>NETTECH India · 2026</p>
+            </div>
+
+            <div class="cert reveal">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M6 8v4M12 8v4M18 8v4"/><rect x="2" y="16" width="6" height="4" rx="1"/><rect x="9" y="16" width="6" height="4" rx="1"/><rect x="16" y="16" width="6" height="4" rx="1"/></svg>
+                <h3>CCNA</h3>
+                <p>NETTECH India · 2026</p>
+            </div>
+
+            <div class="cert reveal">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg>
+                <h3>RHCSA</h3>
+                <p>NETTECH India · 2026</p>
+            </div>
+
+            <div class="cert reveal">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
+                <h3>Data Analytics</h3>
+                <p>NoviTech R&D · 2026</p>
+            </div>
+
+            <div class="cert reveal">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M9 3v3M12 3v3M15 3v3M9 18v3M12 18v3M15 18v3M3 9h3M3 12h3M3 15h3M18 9h3M18 12h3M18 15h3"/></svg>
+                <h3>Hardware & Networking</h3>
+                <p>Omtech Education · 2016</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     EDUCATION
+===================================================== -->
+
+<section id="education">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+            <span>05 — Academics</span>
+            <h2>Education & Results</h2>
+        </div>
+
+        <div class="edu-grid">
+
+            <div class="edu-card reveal">
+                <div class="edu-top">
+                    <h3>MBA (Finance)</h3>
+                    <span class="edu-result">8.73 CGPA (A+)</span>
+                </div>
+                <p class="edu-school">Yashwantrao Chavan Maharashtra Open University</p>
+                <span class="edu-year">July 2025</span>
+            </div>
+
+            <div class="edu-card reveal">
+                <div class="edu-top">
+                    <h3>M.Com</h3>
+                    <span class="edu-result">71.75%</span>
+                </div>
+                <p class="edu-school">IDOL Distance Education</p>
+                <span class="edu-year">July 2021</span>
+            </div>
+
+            <div class="edu-card reveal">
+                <div class="edu-top">
+                    <h3>Diploma in Labour Law</h3>
+                    <span class="edu-result">80.00%</span>
+                </div>
+                <p class="edu-school">Siddharth College of Law, Mumbai</p>
+                <span class="edu-year">July 2020</span>
+            </div>
+
+            <div class="edu-card reveal">
+                <div class="edu-top">
+                    <h3>B.Com</h3>
+                    <span class="edu-result">7.00 CGPA</span>
+                </div>
+                <p class="edu-school">R.K.T. College, Ulhasnagar</p>
+                <span class="edu-year">March 2018</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     EXPERIENCE
+===================================================== -->
+
+<section id="experience">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+            <span>05 — Career</span>
+            <h2>Experience</h2>
+        </div>
+
+        <div class="timeline">
+
+            <div class="timeline-item reveal">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-card">
+
+                    <h3>Admin Executive & IT Support</h3>
+
+                    <div class="company">
+                        Omtech Computer Education | Kalyan, India · 2019 – 2024
+                    </div>
+
+                    <p>
+                        Supervised administrative staff, designed filing and record-keeping
+                        systems, and assigned and monitored tasks — the project-coordination
+                        discipline later applied to multi-device network builds. Created and
+                        maintained personnel, financial and operational records, and taught
+                        MS Office, Tally ERP Prime (GST) and Advanced Excel.
+                    </p>
+
+                    <p style="margin-top:15px;">
+                        Provided technical support for desktops, laptops, printers and
+                        peripherals; installed and maintained operating systems and
+                        applications; troubleshot LAN/Wi-Fi connectivity; and configured
+                        user accounts and access permissions — ensuring smooth day-to-day
+                        IT operations.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="strengths-card reveal">
+
+            <h3><span class="ico-heading"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span> Key Strengths</h3>
+
+            <ul class="strengths-list">
+                <li>Dual-domain foundation — CCNA networking (VLANs, OSPF, ACL security) with RHCSA Linux administration, suited to hybrid Network/Systems support.</li>
+                <li>Hands-on troubleshooting discipline using ping, traceroute, Wireshark and Cisco IOS show commands.</li>
+                <li>5+ years of administrative and IT support experience — desktops, LAN/Wi-Fi, user accounts and access — plus staff supervision and process design.</li>
+                <li>Proficient in Tally ERP, MS Excel and MS Office, with practical exposure to forex market analysis.</li>
+                <li>Strong attention to detail and reliability across technical and administrative work.</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CONTACT
+===================================================== -->
+
+<section id="contact">
+
+    <div class="container">
+
+        <div class="contact-box reveal">
+
+            <div class="section-title" style="margin-bottom:0;">
+
+                <span>06 — Contact</span>
+
+                <h2>Let's Connect</h2>
+
+            </div>
+
+            <p>
+                Available for Network Engineering, Cloud Infrastructure and Linux
+                Systems Administration work — full-time roles or project-based
+                engagements. Reach out and I'll reply the same day.
+            </p>
+
+            <div class="hero-buttons" style="justify-content:center;">
+
+                <a href="mailto:rohanvsonkar@gmail.com"
+                   class="btn btn-primary">
+
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 6.5 12 13 21 6.5"/></svg>
+                    Email Me
+
+                </a>
+
+                <a href="resume.pdf" download="Rohan_Sonkar_Resume.pdf"
+                   class="btn btn-secondary" data-resume>
+
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 12v6M9.5 15.5 12 18l2.5-2.5"/></svg>
+                    Download Resume
+
+                </a>
+
+            </div>
+
+            <div class="socials">
+
+                <a href="https://www.linkedin.com/in/rohanvsonkar"
+                   target="_blank"
+                   class="social"
+                   aria-label="LinkedIn">
+
+                    <svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+
+                </a>
+
+                <a href="https://github.com/rohansonkar1206"
+                   target="_blank"
+                   class="social"
+                   aria-label="GitHub">
+
+                    <svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.1 3.29 9.42 7.86 10.96.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.67.8.56A10.53 10.53 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5z"/></svg>
+
+                </a>
+
+                <a href="mailto:rohanvsonkar@gmail.com"
+                   class="social"
+                   aria-label="Email">
+
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 6.5 12 13 21 6.5"/></svg>
+
+                </a>
+
+                <a href="tel:+918454021296"
+                   class="social"
+                   aria-label="Phone">
+
+                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c0-1 1-2 2-2h2l2 5-2 2c1 3 3 5 6 6l2-2 5 2v2c0 1-1 2-2 2C10.6 20 4 13.4 4 5z"/></svg>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Resume-download status toast -->
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    © <span id="year"></span> Rohan Vinod Sonkar.
+    Built with HTML, CSS, JavaScript, Three.js & AWS.
+
+</footer>
+
+
+<!-- =====================================================
+     THREE.JS
+===================================================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
 <script>
-  const STATS = [
-    { value: "3", label: "Industry certifications" },
-    { value: "5+", label: "Years of admin, IT support & team leadership" },
-    { value: "20+", label: "RHEL lab scenarios solved" },
-    { value: "5", label: "Routers in OSPF Area 0 lab" },
-    { value: "14+", label: "AWS services deployed in one project" },
-  ];
 
-  const MARQUEE = [
-    "CCNA — NETTECH India",
-    "RHCSA — Red Hat",
-    "AWS Cloud Practitioner",
-    "OSPF · VLAN · ACL · NAT",
-    "RHEL · SELinux · LVM · Firewalld",
-    "EC2 · S3 · IAM · VPC · RDS · Lambda",
-    "CloudFront · Route 53 · WAF · CloudFormation",
-    "Cisco Packet Tracer · Wireshark · PuTTY",
-    "MBA Finance — 8.73 CGPA (A+)",
-  ];
+/* =========================================================
+   MOBILE MENU
+========================================================= */
 
-  const SKILL_GROUPS = [
-    { title: "Cloud — AWS", items: [
-      "EC2 provisioning & management","S3 storage, versioning & encryption",
-      "IAM users, groups, roles, permissions","VPC subnets, security groups, routing",
-      "RDS (MySQL), ALB, Auto Scaling","Lambda, SNS, SQS — serverless & decoupling",
-      "CloudFront, Route 53 — global delivery","WAF, KMS — application security",
-      "CloudWatch alarms & logging","CloudFormation (IaC), AWS CLI" ] },
-    { title: "Networking & Switching", items: [
-      "TCP/IP, IPv4 & IPv6, SSH","Subnetting — VLSM / CIDR",
-      "OSPF, static routing, DHCP, DNS, NAT/PAT","VLANs, inter-VLAN routing, trunking",
-      "STP, VTP, port security","Standard & extended ACLs" ] },
-    { title: "Linux Systems Administration", items: [
-      "RHEL 7/8/9 install & configuration","Users, groups, sudo, ACLs, permissions",
-      "LVM storage management","SELinux contexts & Firewalld policy",
-      "Systemd services, cron, journalctl","Bash scripting & automation" ] },
-    { title: "Troubleshooting & Tools", items: [
-      "Ping, traceroute, nslookup","Wireshark packet analysis",
-      "Cisco IOS show commands","VirtualBox / VMware lab environments",
-      "Cisco Packet Tracer, PuTTY","Network & configuration documentation" ] },
-  ];
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
 
-  const PROJECTS = [
-    { index: "01", title: "Scalable AWS Web Application", stack: "AWS — VPC, EC2, RDS, Lambda, CloudFront, IaC",
-      repo: "https://github.com/rohansonkar1206/aws-scalable-web-app",
-      images: [ { src: "aws-architecture.svg", label: "Architecture", alt: "AWS architecture diagram: Route 53, CloudFront, WAF, ALB, EC2, RDS, S3, Lambda, SNS, SQS, CloudWatch and CloudFormation" } ],
-      tags: ["VPC","ALB","RDS","Lambda","SNS/SQS","CloudFront","WAF","KMS","CloudFormation"], points: [
-        "Designed and deployed a scalable, secure blog application — custom VPC networking, load-balanced EC2 with an attached EBS volume, and a decoupled RDS MySQL database.",
-        "Built event-driven automation with Lambda (S3-triggered image resize), SNS (post notifications) and SQS (background task queueing).",
-        "Delivered globally via CloudFront and Route 53, secured with AWS WAF and KMS encryption, and monitored with CloudWatch alarms and logs.",
-        "Provisioned infrastructure as code with a CloudFormation template, deployed via the AWS CLI, for repeatable, version-controlled deployment." ] },
-    { index: "02", title: "Enterprise Network Design", stack: "Cisco Packet Tracer",
-      repo: "https://github.com/rohansonkar1206/Enterprise-Network-Design",
-      images: [
-        { src: "network-design-diagram.png", label: "Design overview", alt: "Enterprise multi-site network design: three branch routers in OSPF Area 0, VLAN segmentation and ACL-protected server network" },
-        { src: "network-topology-packet-tracer.png", label: "Packet Tracer topology", light: true, alt: "Cisco Packet Tracer topology with three ISR 4331 routers, 2960 switches, PCs and a server" }
-      ],
-      tags: ["3-Tier","VLAN","OSPF","DHCP","NAT"], points: [
-        "Solved the traffic-segmentation problem flat, unsegmented networks create — designed a 3-tier, multi-router architecture with VLANs to isolate departments and reduce broadcast traffic.",
-        "Configured OSPF for dynamic routing so the network auto-reroutes on link failure, plus DHCP, NAT and ACLs for automatic addressing, external access and access control between segments.",
-        "Verified every routing and access decision with ping, traceroute and Cisco IOS show commands — not just built it, but proved it worked as intended." ] },
-    { index: "03", title: "OSPF Dynamic Routing", stack: "5 routers, Area 0",
-      tags: ["OSPF Area 0","Failover","Convergence"], points: [
-        "Configured OSPF Area 0 across 5 routers for dynamic route advertisement and automatic failover.",
-        "Confirmed full neighbor adjacency and convergence with show ip ospf neighbors and show ip route ospf.",
-        "Replaced static routing entirely, improving resilience against link failures." ] },
-    { index: "04", title: "Network Security With ACLs", stack: "Standard & extended ACLs",
-      tags: ["Least Privilege","Filtering","Validation"], points: [
-        "Filtered traffic by source IP, destination IP and protocol across 3 departments.",
-        "Enforced least-privilege access between departments and blocked unauthorised flows.",
-        "Validated every permit and deny rule through rigorous ping and IOS verification testing." ] },
-    { index: "05", title: "RHEL Administration Lab", stack: "RHEL 7/8/9, SELinux, LVM",
-      repo: "https://github.com/rohansonkar1206/Rhel-Admin-Lab",
-      images: [ { src: "rhel-lab-diagram.png", label: "Layers", alt: "RHEL server hardening layers: Firewalld, SELinux, users and sudo, LVM, systemd, Bash automation, monitoring and troubleshooting" } ],
-      tags: ["SELinux","LVM","Firewalld","Systemd"], points: [
-        "Solved the problem a default Linux install creates — open ports, permissive access, no mandatory access control — by hardening RHEL servers from default install to a security-conscious baseline.",
-        "Configured SELinux in enforcing mode for mandatory access control and Firewalld rules to restrict open ports/services to only what's necessary.",
-        "Built a home lab covering 20+ real-world admin scenarios (storage, LVM, cron, SSH, services) and automated routine tasks with Bash and Systemd.",
-        "Simulated production incidents and practised root-cause analysis with journalctl, rsyslog and nmcli." ] },
-  ];
+menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+});
 
-  const CERTS = [
-    { name: "AWS Cloud Practitioner", org: "NETTECH India", year: "2026" },
-    { name: "Cisco Certified Network Associate (CCNA)", org: "NETTECH India", year: "2026" },
-    { name: "Red Hat Certified System Administrator (RHCSA)", org: "NETTECH India", year: "2026" },
-    { name: "Data Analytics", org: "NoviTech R&D Private Limited", year: "2026" },
-    { name: "Diploma in Hardware & Networking", org: "Omtech Education", year: "2016" },
-  ];
-
-  const EXPERIENCE = [
-    { role: "Admin Executive & IT Support", org: "Omtech Computer Education | Kalyan, India", period: "2019 – 2024", points: [
-      "Supervised administrative staff, designed filing and record-keeping systems, and assigned and monitored tasks — the project-coordination discipline later applied to multi-device network builds.",
-      "Created and maintained personnel, financial and operational records, and prepared reports for management. Taught MS Office, Tally ERP Prime (GST) and Advanced Excel.",
-      "Provided technical support for desktops, laptops, printers, scanners and peripheral devices; diagnosed and troubleshot hardware and software issues.",
-      "Installed, configured and maintained operating systems and standard applications; performed system upgrades, software patches and preventive maintenance.",
-      "Troubleshot basic LAN and Wi-Fi connectivity issues, and set up and supported network connections for end users.",
-      "Configured and managed user accounts and access permissions; assisted users with login issues, password resets and access-related problems — ensuring timely technical assistance and smooth day-to-day IT operations." ] },
-  ];
-
-  const EDUCATION = [
-    { degree: "MBA (Finance)", school: "Yashwantrao Chavan Maharashtra Open University", result: "8.73 CGPA (A+)", year: "July 2025" },
-    { degree: "M.Com", school: "IDOL Distance Education", result: "71.75%", year: "July 2021" },
-    { degree: "Diploma in Labour Law", school: "Siddharth College of Law, Mumbai", result: "80.00%", year: "July 2020" },
-    { degree: "B.Com", school: "R.K.T. College, Ulhasnagar", result: "7.00 CGPA", year: "March 2018" },
-  ];
-
-  const STRENGTHS = [
-    "Dual-domain foundation — CCNA networking (VLANs, OSPF, ACL security) with RHCSA Linux administration, suited to hybrid Network/Systems support.",
-    "Hands-on troubleshooting discipline using ping, traceroute, Wireshark and Cisco IOS show commands.",
-    "5+ years of administrative and IT support experience — desktops, LAN/Wi-Fi, user accounts and access — plus staff supervision and process design.",
-    "Proficient in Tally ERP, MS Excel and MS Office, with practical exposure to forex market analysis.",
-    "Strong attention to detail and reliability across technical and administrative work.",
-  ];
-
-  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
-
-  // Stats
-  document.getElementById("statsGrid").innerHTML = STATS.map(s => `
-    <div class="surface-card stat-card">
-      <p class="stat-value font-display">${esc(s.value)}</p>
-      <p class="stat-label">${esc(s.label)}</p>
-    </div>`).join("");
-
-  // Marquee (two copies for seamless loop)
-  document.getElementById("marqueeTrack").innerHTML = [0,1].map(() => `
-    <div class="marquee-copy">
-      ${MARQUEE.map(item => `<span class="marquee-item">${esc(item)}<span class="dot">◆</span></span>`).join("")}
-    </div>`).join("");
-
-  // Certs
-  document.getElementById("certList").innerHTML = CERTS.map(c => `
-    <div class="cert-item">
-      <div><p class="cert-name">${esc(c.name)}</p><p class="cert-org">${esc(c.org)}</p></div>
-      <span class="cert-year">${esc(c.year)}</span>
-    </div>`).join("");
-
-  // Skills
-  document.getElementById("skillsGrid").innerHTML = SKILL_GROUPS.map(g => `
-    <div class="surface-card card-pad skill-group">
-      <h3>${esc(g.title)}</h3>
-      <div class="divider"></div>
-      <ul class="skill-items">
-        ${g.items.map(i => `<li><span class="dot"></span>${esc(i)}</li>`).join("")}
-      </ul>
-    </div>`).join("");
-
-  // Projects
-  const gallery = (p, pi) => {
-    if (!p.images) return "";
-    const tabs = p.images.length > 1 ? `
-        <div class="gallery-tabs" role="group" aria-label="${esc(p.title)} diagrams">
-          ${p.images.map((im, i) => `<button type="button" class="gallery-tab" data-gallery="${pi}" data-i="${i}" aria-pressed="${i === 0}">${esc(im.label)}</button>`).join("")}
-        </div>` : "";
-    const figs = p.images.map((im, i) => `
-        <a class="gallery-fig${i === 0 ? " active" : ""}" data-fig="${pi}-${i}" href="${esc(im.src)}" target="_blank" rel="noopener" aria-label="Open ${esc(im.label)} full size">
-          <img src="${esc(im.src)}" alt="${esc(im.alt)}" class="project-diagram${im.light ? " light" : ""}" loading="lazy" />
-        </a>`).join("");
-    return `<div class="project-gallery">${tabs}${figs}</div>`;
-  };
-
-  document.getElementById("projectsGrid").innerHTML = PROJECTS.map((p, pi) => `
-    <article class="surface-card card-pad${p.images ? " project-featured" : ""}">
-      <span class="project-index font-mono">${esc(p.index)}</span>
-      <h3 class="project-title">${esc(p.title)}</h3>
-      <p class="project-stack font-mono">${esc(p.stack)}</p>
-      ${gallery(p, pi)}
-      <ul class="project-points">
-        ${p.points.map(pt => `<li><span class="dot"></span>${esc(pt)}</li>`).join("")}
-      </ul>
-      <div class="project-tags">
-        ${p.tags.map(t => `<span class="chip">${esc(t)}</span>`).join("")}
-      </div>
-      ${p.repo ? `<div class="project-links"><a class="btn-outline" href="${esc(p.repo)}" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>` : ""}
-    </article>`).join("");
-
-  // Diagram tabs (projects with more than one image)
-  document.getElementById("projectsGrid").addEventListener("click", (e) => {
-    const tab = e.target.closest(".gallery-tab");
-    if (!tab) return;
-    const { gallery: g, i } = tab.dataset;
-    tab.parentElement.querySelectorAll(".gallery-tab").forEach(t => t.setAttribute("aria-pressed", String(t === tab)));
-    tab.closest(".project-gallery").querySelectorAll(".gallery-fig").forEach(f =>
-      f.classList.toggle("active", f.dataset.fig === `${g}-${i}`));
-  });
-
-  // Experience timeline
-  document.getElementById("expTimeline").innerHTML = EXPERIENCE.map(job => `
-    <li>
-      <span class="node"></span>
-      <h3 class="job-role">${esc(job.role)}</h3>
-      <p class="job-org">${esc(job.org)}</p>
-      <p class="job-period font-mono">${esc(job.period)}</p>
-      <ul class="job-points">
-        ${job.points.map(pt => `<li><span class="dot"></span>${esc(pt)}</li>`).join("")}
-      </ul>
-    </li>`).join("");
-
-  // Strengths
-  document.getElementById("strengthsList").innerHTML = STRENGTHS.map(s => `<li>${esc(s)}</li>`).join("");
-
-  // Education
-  document.getElementById("eduGrid").innerHTML = EDUCATION.map(e => `
-    <div class="surface-card edu-card">
-      <div><h3 class="edu-degree">${esc(e.degree)}</h3><p class="edu-school">${esc(e.school)}</p></div>
-      <div><p class="edu-result font-mono">${esc(e.result)}</p><p class="edu-year font-mono">${esc(e.year)}</p></div>
-    </div>`).join("");
-
-  // Social links — set a URL to show it; leave "" to hide it
-  const SOCIALS = [
-    { label: "LinkedIn", url: "https://www.linkedin.com/in/rohanvsonkar" },
-    { label: "GitHub",   url: "https://github.com/rohansonkar1206" },
-  ].filter(x => x.url);
-
-  const shortUrl = (u) => u.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
-
-  document.getElementById("heroContacts").insertAdjacentHTML("beforeend", SOCIALS.map(x => `
-    <li><a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.label)}</a></li>`).join(""));
-
-  document.getElementById("contactCards").insertAdjacentHTML("beforeend", SOCIALS.map(x => `
-    <a class="surface-card" href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">
-      <p class="k">${esc(x.label)}</p><p class="v">${esc(shortUrl(x.url))}</p>
-    </a>`).join(""));
-
-  // Header scroll state
-  const header = document.getElementById("siteHeader");
-  const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 24);
-  onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
-
-  // Mobile menu
-  const menuBtn = document.getElementById("menuBtn");
-  const mobileNav = document.getElementById("mobileNav");
-  menuBtn.addEventListener("click", () => {
-    const open = mobileNav.classList.toggle("open");
-    menuBtn.textContent = open ? "Close" : "Menu";
-    menuBtn.setAttribute("aria-expanded", String(open));
-  });
-  mobileNav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
-    mobileNav.classList.remove("open");
-    menuBtn.textContent = "Menu";
-    menuBtn.setAttribute("aria-expanded", "false");
-  }));
-
-  // Reveal-on-scroll for sections
-  const sections = document.querySelectorAll("section.section");
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        io.unobserve(entry.target);
-      }
+document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
     });
-  }, { threshold: 0.12 });
-  sections.forEach(s => io.observe(s));
+});
 
-  // Footer year
-  document.getElementById("footerYear").textContent = `© ${new Date().getFullYear()} Rohan Vinod Sonkar`;
 
-  // Resume download — verifies the PDF exists and downloads it; shows a clear message if it doesn't
-  const toast = document.getElementById("toast");
-  let toastTimer;
-  const showToast = (html) => {
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const revealElements = document.querySelectorAll(".reveal");
+
+const revealObserver = new IntersectionObserver(
+    entries => {
+
+        entries.forEach(entry => {
+
+            if(entry.isIntersecting){
+
+                entry.target.classList.add("active");
+
+            }
+
+        });
+
+    },
+    {
+        threshold:.12
+    }
+);
+
+revealElements.forEach(el => revealObserver.observe(el));
+
+
+/* =========================================================
+   FOOTER YEAR
+========================================================= */
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+
+/* =========================================================
+   RESUME DOWNLOAD (verifies the file exists first)
+========================================================= */
+
+const toast = document.getElementById("toast");
+let toastTimer;
+
+const showToast = (html) => {
     toast.innerHTML = html;
     toast.classList.add("show");
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => toast.classList.remove("show"), 7000);
-  };
-  document.querySelectorAll("a[data-resume]").forEach(link => {
+};
+
+document.querySelectorAll("[data-resume]").forEach(link => {
     link.addEventListener("click", async (e) => {
-      if (!/^https?:$/.test(location.protocol)) return; // opened as a local file: let the browser handle it
-      e.preventDefault();
-      try {
-        const res = await fetch(link.href, { cache: "no-store" });
-        const type = res.headers.get("content-type") || "";
-        if (!res.ok || type.includes("text/html")) throw new Error("resume.pdf not found on server"); // an HTML reply means the host returned an error/fallback page
-        const url = URL.createObjectURL(await res.blob());
-        const tmp = document.createElement("a");
-        tmp.href = url;
-        tmp.download = "Rohan_Sonkar_Resume.pdf";
-        document.body.appendChild(tmp);
-        tmp.click();
-        tmp.remove();
-        setTimeout(() => URL.revokeObjectURL(url), 1500);
-      } catch (err) {
-        console.warn("Resume download failed:", err);
-        showToast('The resume isn’t available right now. Please <a href="mailto:rohanvsonkar@gmail.com?subject=Resume%20request">email me</a> and I’ll send it over.');
-      }
+        if (!/^https?:$/.test(location.protocol)) return;
+        e.preventDefault();
+        try {
+            const res = await fetch(link.href, { cache: "no-store" });
+            const type = res.headers.get("content-type") || "";
+            if (!res.ok || type.includes("text/html")) throw new Error("resume.pdf not found");
+            const url = URL.createObjectURL(await res.blob());
+            const tmp = document.createElement("a");
+            tmp.href = url;
+            tmp.download = "Rohan_Sonkar_Resume.pdf";
+            document.body.appendChild(tmp);
+            tmp.click();
+            tmp.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 1500);
+        } catch (err) {
+            console.warn("Resume download failed:", err);
+            showToast('The resume isn\u2019t available right now. Please <a href="mailto:rohanvsonkar@gmail.com?subject=Resume%20request">email me</a> and I\u2019ll send it over.');
+        }
     });
-  });
+});
+
+
+/* =========================================================
+   THREE.JS 3D BACKGROUND
+========================================================= */
+
+const canvas = document.getElementById("three-bg");
+
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+);
+
+camera.position.z = 7;
+
+
+/* Renderer */
+
+const renderer = new THREE.WebGLRenderer({
+    canvas:canvas,
+    alpha:true,
+    antialias:true
+});
+
+renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio,2)
+);
+
+renderer.setSize(
+    window.innerWidth,
+    window.innerHeight
+);
+
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+const particleCount =
+    window.innerWidth < 700 ? 800 : 1800;
+
+const particleGeometry =
+    new THREE.BufferGeometry();
+
+const positions =
+    new Float32Array(particleCount * 3);
+
+for(let i=0;i<particleCount;i++){
+
+    positions[i*3] =
+        (Math.random()-.5)*25;
+
+    positions[i*3+1] =
+        (Math.random()-.5)*18;
+
+    positions[i*3+2] =
+        (Math.random()-.5)*15;
+
+}
+
+particleGeometry.setAttribute(
+    "position",
+    new THREE.BufferAttribute(
+        positions,
+        3
+    )
+);
+
+const particleMaterial =
+    new THREE.PointsMaterial({
+
+        color:0x00eaff,
+
+        size:
+            window.innerWidth < 700
+            ? .018
+            : .025,
+
+        transparent:true,
+
+        opacity:.75
+
+    });
+
+const particles =
+    new THREE.Points(
+        particleGeometry,
+        particleMaterial
+    );
+
+scene.add(particles);
+
+
+/* =========================================================
+   WIREFRAME NETWORK SPHERE
+========================================================= */
+
+const sphereGeometry =
+    new THREE.IcosahedronGeometry(
+        2.5,
+        2
+    );
+
+const sphereMaterial =
+    new THREE.MeshBasicMaterial({
+
+        color:0x0088ff,
+
+        wireframe:true,
+
+        transparent:true,
+
+        opacity:.13
+
+    });
+
+const networkSphere =
+    new THREE.Mesh(
+        sphereGeometry,
+        sphereMaterial
+    );
+
+networkSphere.position.set(
+    4,
+    0,
+    -2
+);
+
+scene.add(networkSphere);
+
+
+/* =========================================================
+   FLOATING CUBES
+========================================================= */
+
+const cubes = [];
+
+for(let i=0;i<18;i++){
+
+    const geometry =
+        new THREE.BoxGeometry(
+            .18,
+            .18,
+            .18
+        );
+
+    const material =
+        new THREE.MeshBasicMaterial({
+
+            color:
+                i % 2 === 0
+                ? 0x00eaff
+                : 0x7c5cff,
+
+            wireframe:true,
+
+            transparent:true,
+
+            opacity:.55
+
+        });
+
+    const cube =
+        new THREE.Mesh(
+            geometry,
+            material
+        );
+
+    cube.position.set(
+
+        (Math.random()-.5)*15,
+
+        (Math.random()-.5)*10,
+
+        (Math.random()-.5)*8
+
+    );
+
+    cube.rotation.set(
+        Math.random(),
+        Math.random(),
+        Math.random()
+    );
+
+    scene.add(cube);
+
+    cubes.push(cube);
+}
+
+
+/* =========================================================
+   MOUSE MOVEMENT
+========================================================= */
+
+let mouseX = 0;
+let mouseY = 0;
+
+document.addEventListener(
+    "mousemove",
+    event => {
+
+        mouseX =
+            (event.clientX /
+            window.innerWidth - .5);
+
+        mouseY =
+            (event.clientY /
+            window.innerHeight - .5);
+
+    }
+);
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+function animate(){
+
+    requestAnimationFrame(animate);
+
+    particles.rotation.y += .00025;
+    particles.rotation.x += .00005;
+
+    networkSphere.rotation.x += .001;
+    networkSphere.rotation.y += .002;
+
+    cubes.forEach((cube,index)=>{
+
+        cube.rotation.x += .003;
+        cube.rotation.y += .004;
+
+        cube.position.y +=
+            Math.sin(
+                Date.now()*.0005+index
+            )*.0005;
+
+    });
+
+
+    camera.position.x +=
+        (mouseX*.35-camera.position.x)*.015;
+
+    camera.position.y +=
+        (-mouseY*.25-camera.position.y)*.015;
+
+    camera.lookAt(scene.position);
+
+    renderer.render(
+        scene,
+        camera
+    );
+
+}
+
+animate();
+
+
+/* =========================================================
+   RESIZE
+========================================================= */
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        camera.aspect =
+            window.innerWidth /
+            window.innerHeight;
+
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(
+            window.innerWidth,
+            window.innerHeight
+        );
+
+    }
+);
+
 </script>
+
 </body>
 </html>
